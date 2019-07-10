@@ -4,7 +4,6 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
-import android.content.SharedPreferences
 import android.database.Cursor
 import android.graphics.Color
 import android.os.Build
@@ -47,21 +46,21 @@ class MainActivity : AppCompatActivity() {
 
         ApiGetTask {
             if (!it.isNullOrEmpty()) {
-                all_update(JSONObject(it))
+                allUpdate(JSONObject(it))
             } else {
                 Toast.makeText(this, "APIの通信に失敗しました(´･ω･`)", Toast.LENGTH_SHORT).show()
             }
             startActivity<TitleActivity>()
             finish()
-        }.execute("db-update.php", hashMapOf("last_update_date" to find_last_update()).toString())
+        }.execute("db-update.php", hashMapOf("last_update_date" to findLastUpdate()).toString())
     }
 
-    //    最終アップデートの日付を、yyyy-MM-dd のフォーマットでStringとして返す。
-    fun find_last_update(): String {
+    // 最終アップデートの日付を、yyyy-MM-dd のフォーマットでStringとして返す。
+    private fun findLastUpdate(): String {
         val questions = SQLiteHelper(this)
         val db = questions.readableDatabase
         val query = "SELECT update_date FROM questions ORDER BY update_date desc limit 1"
-        var cursor: Cursor
+        val cursor: Cursor
 
         var result = "2019-05-06"
         return try {
@@ -77,11 +76,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //    受け取った全ての値をDBに登録する。
-    fun all_update(callback: JSONObject): Boolean {
+    // 受け取った全ての値をDBに登録する。
+    private fun allUpdate(callback: JSONObject): Boolean {
         var json = callback
         if (json.getString("status") != "S00") {
-//            Log.d("TEST", json.toString())
             return false
         }
 
@@ -158,9 +156,9 @@ class MainActivity : AppCompatActivity() {
             for (i in 0 until jArray.length()) {
                 questions.add_record(
                     jArray.getJSONObject(i).getInt("question_id"),
-                    unescapeHTLM(jArray.getJSONObject(i).getString("question")),
+                    unEscapeHTML(jArray.getJSONObject(i).getString("question")),
                     jArray.getJSONObject(i).getInt("is_have_image"),
-                    unescapeHTLM(jArray.getJSONObject(i).getString("comment")),
+                    unEscapeHTML(jArray.getJSONObject(i).getString("comment")),
                     jArray.getJSONObject(i).getString("update_date"),
                     jArray.getJSONObject(i).getInt("question_flag")
                 )
@@ -168,31 +166,19 @@ class MainActivity : AppCompatActivity() {
         }
         jArray = json.getJSONArray("questions_genres_db")
         if (jArray != {}) {
-            for (i in 0..jArray.length() - 1) {
+            for (i in 0 until jArray.length()) {
                 questions_genres.add_record(
                     jArray.getJSONObject(i).getInt("question_id"),
                     jArray.getJSONObject(i).getInt("genre_id")
                 )
             }
         }
-
-//        テーブル内データ確認用
-//        Log.d("tete1",answers.find_answers(1).toString())
-//        Log.d("tete2",answers_rate.find_all_rate().toString())
-//        Log.d("tete3",exams_numbers.find_exams_numbers(1).toString())
-//        Log.d("tete4",exams_questions.find_all_questions(1,"FE2019S").toString())
-//        Log.d("tete5",genres.find_genre(1).toString())
-//        Log.d("tete6",image.find_image(1).toString())
-//        Log.d("tete7",questions.find_question(1).toString())
-//        Log.d("tete8",questions.find_comment(1).toString())
-//        Log.d("tete9",questions_genres.find_question_genres(1).toString())
-//        Log.d("tete0",questions_genres.find_genre_questions(1).toString())
-//        Log.d("test",exams_questions.find_exam_number_from_question_id(1))
         db.close()
         return true
     }
 
-    //端末に登録されているトークンをAPIサーバに送信し、ユーザーIDを受け取る
+    // 端末に登録されているトークンをAPIサーバに送信し、ユーザーIDを受け取る
+    /*
     fun get_user_id(token: String): Boolean {
         var result: Boolean = true
         ApiPostTask {
@@ -207,13 +193,13 @@ class MainActivity : AppCompatActivity() {
         }.execute("add-user.php", hashMapOf("token" to token).toString())
         return result
     }
+    */
 
-    // 文字列中のHTLM特殊文字を変換して、変換後の文字列を返す
-    fun unescapeHTLM(str: String): String {
-        var str2 = str.replace("&quot;".toRegex(), "\"")
+    // 文字列中のHTML特殊文字を変換して、変換後の文字列を返す
+    private fun unEscapeHTML(str: String): String {
+        return str.replace("&quot;".toRegex(), "\"")
             .replace("&lt;".toRegex(), "<")
             .replace("&gt;".toRegex(), ">")
             .replace("&amp;".toRegex(), "&")
-        return str2
     }
 }
