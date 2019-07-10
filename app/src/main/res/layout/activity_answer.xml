@@ -5,71 +5,111 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".AnswerActivity" android:isScrollContainer="false">
+        tools:context=".AnswerActivity" android:isScrollContainer="false" android:background="#ECECEC">
 
-    <ImageButton
-            android:layout_width="55dp"
-            android:layout_height="0dp" app:srcCompat="@android:drawable/ic_menu_revert"
-            android:id="@+id/AA_Back_BTN"
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/A_title_text"
+            android:textSize="36sp"
+            android:textAlignment="center"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="65dp" app:layout_constraintBottom_toTopOf="@+id/answer_examNumber_text"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"/>
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            android:text="@string/A_title_Text_Str"/>
+    <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@android:drawable/ic_menu_revert"
+            android:id="@+id/AA_Back_BTN"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" style="@style/Widget.AppCompat.Button.Colored"/>
     <Button
-            android:text="次の問題へ"
-            android:layout_width="220dp"
-            android:layout_height="wrap_content" android:id="@+id/AA_Next_BTN"
-            android:textSize="24sp"
-            app:layout_constraintTop_toBottomOf="@+id/answer_examNumber_text" android:layout_marginBottom="24dp"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="0.513"/>
-    <TextView
-            android:layout_width="259dp"
-            android:layout_height="0dp"
-            android:id="@+id/answer_examNumber_text" android:text="平成31年度春期午前"
-            android:layout_marginTop="128dp"
-            app:layout_constraintStart_toEndOf="@+id/answer_question_correct_text" android:layout_marginBottom="514dp"
-            app:layout_constraintEnd_toEndOf="@+id/answer_question_correct_text"
-            app:layout_constraintBottom_toTopOf="@+id/AA_Next_BTN" app:layout_constraintTop_toTopOf="parent"/>
-    <TextView
-            android:text="問9"
-            android:layout_width="74dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/answer_questionNumber_text" android:textSize="24sp"
-            app:layout_constraintTop_toBottomOf="@+id/answer_examNumber_text"
-            app:layout_constraintEnd_toEndOf="@+id/answer_question_correct_text"
-            app:layout_constraintBottom_toTopOf="@+id/answer_question_correct_text"
-            app:layout_constraintStart_toStartOf="@+id/AA_Back_BTN"
-            android:layout_marginStart="53dp" android:layout_marginEnd="54dp"/>
-    <TextView
-            android:text="正解：ア"
-            android:layout_width="128dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/answer_question_correct_text"
-            android:textSize="28sp"
-            app:layout_constraintStart_toStartOf="@+id/AA_answerComment_text"
-            app:layout_constraintTop_toBottomOf="@+id/answer_questionNumber_text" android:layout_marginBottom="40dp"
-            app:layout_constraintBottom_toTopOf="@+id/AA_answerComment_text"/>
-    <TextView
-            android:text="解説文"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:id="@+id/AA_answerComment_text"
-            android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@+id/answer_question_correct_text" android:layout_marginBottom="135dp"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="61dp" android:layout_marginEnd="61dp"
-            android:isScrollContainer="true"/>
-            android:layout_marginStart="61dp" android:layout_marginEnd="61dp"/>
+            android:layout_height="wrap_content" android:id="@+id/AA_Next_BTN"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="24dp"
+            android:text="@string/AA_Next_BTN_Str" style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_marginStart="8dp" android:layout_marginEnd="8dp"/>
     <TextView
-            android:text="TextView"
+            android:text="@string/AA_Seigo_Text_Str"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/AA_AnsweResult_Text" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/AA_answerComment_text" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/answer_question_correct_text"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            app:layout_constraintVertical_bias="0.0"/>
+            android:id="@+id/AA_seigo_Text"
+            app:layout_constraintTop_toBottomOf="@+id/AA_Back_BTN"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"/>
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@+id/AA_seigo_Text"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp"
+            android:id="@+id/AA_Top_ScrollView" android:background="#F3F3F3" android:elevation="20dp"
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/AA_centerLine">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/AA_Top_LanearLayout"
+                android:background="#F3F3F3"
+        >
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/answer_examNumber_text"
+                    android:paddingStart="8dp"
+                    android:paddingTop="8dp" android:paddingEnd="8dp" android:paddingBottom="0dp" tools:text="問題の年度"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/AA_AnsweResult_Text"
+                    tools:text="正解or不正解"
+                    android:textSize="24sp" android:textAlignment="center"
+            />
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/answer_question_correct_text"
+                    android:textSize="18sp"
+                    android:paddingStart="8dp" android:paddingEnd="8dp" android:paddingBottom="8dp"
+                    android:paddingTop="0dp" tools:text="正解：X"/>
+        </LinearLayout>
+    </ScrollView>
+    <android.support.constraint.Guideline
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/AA_centerLine"
+            app:layout_constraintGuide_percent="0.4"/>
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/answer_questionNumber_text" android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp" app:layout_constraintTop_toTopOf="@+id/AA_centerLine"
+            android:layout_marginTop="8dp"
+            android:text="@string/A_title_Text_Str"/>
+    <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
+            android:id="@+id/AA_Bottom_ScrollView" android:elevation="20dp" android:background="#F3F3F3"
+            app:layout_constraintTop_toBottomOf="@+id/answer_questionNumber_text"
+            android:layout_marginTop="8dp" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/AA_Next_BTN">
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/AA_answerComment_text"
+                android:textSize="14sp"
+                android:isScrollContainer="true"
+                tools:text="解説文" android:paddingStart="8dp" android:paddingTop="8dp" android:paddingEnd="8dp"
+                android:paddingBottom="8dp"
+        />
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>

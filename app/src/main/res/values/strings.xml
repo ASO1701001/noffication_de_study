@@ -1,6 +1,28 @@
 <resources>
     <string name="app_name">noffication_de_study</string>
-    <string name="Return_Answer_BTN_Str">解説へ戻る</string>
+    <string name="Return_Answer_BTN_Str">解説を見る</string>
+    <string name="QA_Title_Text_Str">問題</string>
+    <string name="QA_Answer_0_BTN">ア</string>
+    <string name="QA_Answer_1_BTN">イ</string>
+    <string name="QA_Answer_2_BTN">ウ</string>
+    <string name="QA_Answer_3_BTN">エ</string>
+    <string name="QA_End_BTN_Diskription">戻</string>
+    <string name="QA_Next_BTN_Discription">進</string>
+    <string name="QA_Next_BTN_Str">次へ進む</string>
+    <string name="AA_Next_BTN_Str">問題へ戻る</string>
+    <string name="NDS_INFO_Str">通知で画面を出題し、解答します。</string>
+    <string name="Q_option_txt1_Str">出題方法</string>
+    <string name="way_four_radio_button_Str">四択問題</string>
+    <string name="way_two_radio_button_Str">二択問題</string>
+    <string name="option_title2_Str">通知を行う時間の範囲</string>
+    <string name="O_textView4_Str">分</string>
+    <string name="O_option_title4_Str">通知を行う間隔　</string>
+    <string name="O_title_Text_Str">オプション</string>
+    <string name="A_title_Text_Str">解説</string>
+    <string name="Q_Question_Text_Str">問題文</string>
+    <string name="AA_Seigo_Text_Str">正誤</string>
+    <string name="QA_maru_BTN_Str">◯</string>
+    <string name="QA_batu_BTN_Str">☓</string>
     <string-array name="OA_Noffication_Interval_list">
         <item>5</item>
         <item>10</item>
