@@ -5,62 +5,63 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".QuestionOptionActivity">
+        tools:context=".QuestionOptionActivity" android:background="#ECECEC">
 
     <ImageButton
-            android:layout_width="55dp"
-            android:layout_height="55dp" app:srcCompat="@android:drawable/ic_menu_revert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@android:drawable/ic_menu_revert"
             android:id="@+id/QOA_Back_BTN"
             app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/textView7" android:layout_marginEnd="8dp"/>
+            app:layout_constraintStart_toStartOf="parent"
+            style="@android:style/Widget.Material.Button.Colored" android:layout_marginStart="8dp"/>
     <TextView
-            android:layout_width="275dp"
-            android:layout_height="55dp" android:id="@+id/textView7"
-            android:textSize="36sp" android:text="出題オプション" android:textAlignment="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textView7"
+            android:textSize="30sp" android:text="出題オプション" android:textAlignment="center"
             android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toEndOf="@+id/QOA_Back_BTN"
-            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
     <Button
             android:text="出題開始"
-            android:layout_width="120dp"
-            android:layout_height="60dp" android:id="@+id/QOA_Start_BTN"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" android:id="@+id/QOA_Start_BTN"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp"
-    />
+            style="@android:style/Widget.Material.Button.Colored" android:textSize="30sp"/>
     <ScrollView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/scrollView4" android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/textView7">
+            app:layout_constraintHorizontal_bias="0.0" android:id="@+id/scrollView" android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/QOA_Back_BTN"
+            android:background="#F3F3F3" android:elevation="20dp" android:padding="8dp">
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                       android:orientation="vertical">
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content" android:paddingTop="8dp">
                 <ImageButton
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp" app:srcCompat="@android:drawable/arrow_down_float"
-                        android:id="@+id/imageButton"
-                />
+                        android:layout_height="wrap_content" app:srcCompat="@android:drawable/arrow_down_float"
+                        android:id="@+id/QOA_Select_Exam_BTN"
+                        style="@style/Base.Widget.AppCompat.Button.Colored"/>
                 <TextView
                         android:text="試験回選択"
                         android:layout_width="wrap_content"
-                        android:layout_height="25dp" android:id="@+id/textView10"
-                        android:textSize="18sp"
+                        android:layout_height="wrap_content" android:id="@+id/textView10"
+                        android:textSize="36sp"
                 />
             </LinearLayout>
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="match_parent" android:id="@+id/QOA_Select_Exam_LL" android:paddingTop="8dp">
                 <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="wrap_content"
@@ -68,16 +69,18 @@
                     <CheckBox
                             android:text="H31春"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" android:id="@+id/QOA_Select_Exam_Number_H31S_RBTN"/>
+                            android:layout_height="wrap_content" android:id="@+id/QOA_Select_Exam_Number_H31S_RBTN"
+                            android:textSize="14sp"/>
                     <CheckBox
                             android:text="H30秋"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:id="@+id/QOA_Select_Exam_Number_H30F_RBTN"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1" android:textSize="14sp"/>
                     <CheckBox
                             android:text="H30春"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" android:id="@+id/QOA_Select_Exam_Number_H30S_RBTN"/>
+                            android:layout_height="wrap_content" android:id="@+id/QOA_Select_Exam_Number_H30S_RBTN"
+                            android:textSize="14sp"/>
                 </LinearLayout>
                 <LinearLayout
                         android:orientation="horizontal"
@@ -87,44 +90,45 @@
                             android:text="H29秋"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:id="@+id/QOA_Select_Exam_Number_H29F_RBTN"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1" android:textSize="14sp"/>
                     <CheckBox
                             android:text="H29春"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:id="@+id/QOA_Select_Exam_Number_H29S_RBTN"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1" android:textSize="14sp"/>
                     <CheckBox
                             android:text="H28秋"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:id="@+id/QOA_Select_Exam_Number_H28F_RBTN"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1" android:textSize="14sp"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content" android:paddingTop="8dp">
                 <ImageButton
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp" app:srcCompat="@android:drawable/arrow_down_float"
-                        android:id="@+id/imageButton2"
-                />
+                        android:layout_height="wrap_content" app:srcCompat="@android:drawable/arrow_down_float"
+                        android:id="@+id/QOA_Select_Genres_BTN"
+                        style="@android:style/Widget.Material.Button.Colored"/>
                 <TextView
                         android:text="ジャンル選択"
-                        android:layout_width="120dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/textView5"
-                        android:textSize="18sp"
+                        android:textSize="36sp"
                 />
             </LinearLayout>
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="120dp">
+                    android:layout_height="wrap_content" android:id="@+id/QOA_Select_Genres_LL"
+                    android:paddingTop="8dp">
                 <CheckBox
                         android:text="CheckBox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/QOA_Select_Genres_1"
-                />
+                        style="@android:style/Widget.Material.CompoundButton.CheckBox"/>
                 <CheckBox
                         android:text="CheckBox"
                         android:layout_width="wrap_content"
@@ -134,29 +138,48 @@
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp">
+                    android:layout_height="wrap_content" android:paddingTop="8dp">
+                <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" app:srcCompat="@android:drawable/arrow_down_float"
+                        android:id="@+id/QOA_Select_Amount_BTN"
+                        style="@android:style/Widget.Material.Button.Colored"/>
                 <TextView
                         android:text="問題数選択"
-                        android:layout_width="130dp"
-                        android:layout_height="25dp" android:id="@+id/textView8"
-                        android:textSize="18sp"
-                />
-                <Spinner
-                        android:layout_width="120dp"
-                        android:layout_height="25dp" android:id="@+id/QOA_Question_Amount_BOX"
-                        android:entries="@array/QOA_Question_Amount_BOX_list"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/textView8"
+                        android:textSize="36sp"
                 />
             </LinearLayout>
-            <TextView
-                    android:text="出題方法"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/textView9"
-                    android:textSize="18sp"
-            />
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/LinearLayout" android:paddingTop="8dp">
+                <Spinner
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/QOA_Question_Amount_BOX"
+                        android:entries="@array/QOA_Question_Amount_BOX_list"
+                        style="@android:style/Widget.Material.Spinner"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:paddingTop="8dp">
+                <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" app:srcCompat="@android:drawable/arrow_down_float"
+                        android:id="@+id/QOA_Select_Method_BTN" style="@android:style/Widget.Material.Button.Colored"/>
+                <TextView
+                        android:text="出題方法"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/textView9"
+                        android:textSize="36sp"
+                />
+            </LinearLayout>
             <RadioGroup
-                    android:layout_width="210dp"
-                    android:layout_height="90dp"
-            >
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/QOA_Select_Method_Group" android:paddingTop="8dp">
                 <RadioButton
                         android:text="順番に出題"
                         android:layout_width="wrap_content"

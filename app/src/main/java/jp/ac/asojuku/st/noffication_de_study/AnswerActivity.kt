@@ -1,5 +1,6 @@
 package jp.ac.asojuku.st.noffication_de_study
 
+
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle

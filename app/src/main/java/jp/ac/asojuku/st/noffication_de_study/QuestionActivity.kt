@@ -100,7 +100,6 @@ class QuestionActivity : AppCompatActivity() {
                     QA_TwoAnswers.visibility = View.GONE
                 }
             }
-
         }
 
     }
@@ -261,7 +260,6 @@ class QuestionActivity : AppCompatActivity() {
                         }
                     }
                     examData.isCorrect_list.clear()
-
                     startActivity<QuestionActivity>("exam_data" to examData)
                     finish()
 
@@ -330,7 +328,6 @@ class QuestionActivity : AppCompatActivity() {
                 }
                 .setNegativeButton("がんばる") { dialog, which ->
                     //何もしない
-
                 }.show()
         }
         return
