@@ -140,4 +140,11 @@
                 android:layout_height="wrap_content" android:id="@+id/QA_batu_BTN" android:layout_weight="1"
                 style="@style/Widget.AppCompat.Button.Colored" android:text="@string/QA_batu_BTN_Str"/>
     </LinearLayout>
+    <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp" android:background="#FFFFFFFF"
+            android:id="@+id/QA_Dialog_Background" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
+            android:translationZ="200dp"/>
 </android.support.constraint.ConstraintLayout>
