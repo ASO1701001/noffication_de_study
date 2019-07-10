@@ -119,4 +119,10 @@
             />
         </LinearLayout>
     </ScrollView>
+    <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp" app:srcCompat="@color/common_google_signin_btn_text_dark_pressed"
+            android:id="@+id/QA_Dialog_Background" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 </android.support.constraint.ConstraintLayout>

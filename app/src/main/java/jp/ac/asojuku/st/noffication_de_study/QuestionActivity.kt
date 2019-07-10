@@ -28,6 +28,7 @@ class QuestionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_question)
         examData = intent.getSerializableExtra("exam_data") as ExamData
+        QA_Dialog_Background.visibility = View.GONE
 
         choiceNextQuestion() //次の問題を読み込んでおく
 
@@ -209,6 +210,8 @@ class QuestionActivity : AppCompatActivity() {
         if (skipCount > 0) {
             popupMsg3 = "スキップ数:" + skipCount + BR
         }
+
+        QA_Dialog_Background.visibility = View.VISIBLE
 
         var popupMsgs = popupMsg1 + popupMsg2 + popupMsg3
 
