@@ -91,11 +91,6 @@ class QuestionActivity : AppCompatActivity() {
 
     }
 
-//    //コンストラクタ
-//    fun atFirst() {
-//        //集計か出題かを判定？
-//    }
-
     //次の問題設定
     fun choiceNextQuestion() {
         if (examData.question_current == 0) {
@@ -194,13 +189,6 @@ class QuestionActivity : AppCompatActivity() {
         examData.isCorrect_list.add(isCorrected)//解いた問題が正解だったかどうかがBoolean型で入る
     }
 
-//    なんか使わないっぽい？（クラス一覧参照）
-//    //結果集計
-//    fun collectResult() {
-//
-//    }
-
-
     //結果表示
     fun printResult() {
         //解いた問題数を取得
@@ -274,29 +262,6 @@ class QuestionActivity : AppCompatActivity() {
         }
     }
 
-    fun regResult() {
-        val date: Date = Date()
-        val test1: String = DateFormat.format("yyyy-MM-dd", date).toString()
-//        Log.d("tetes",hashMapOf(
-//            "question_id" to exam_data.question_current,
-//            "answer_choice" to exam_data.answered_list.get(exam_data.question_current),
-//            "answer_time" to test1).toString())
-        ApiPostTask {
-            if (JSONObject(it).getString("status") != "E00") {
-                Toast.makeText(this, "APIの通信に成功しました(｀・ω・´)", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, "APIの通信に失敗しました(´･ω･`)", Toast.LENGTH_SHORT).show()
-            }
-        }.execute(
-            "add-answer.php", hashMapOf(
-                "question_id" to examData.question_current,
-                "answer_choice" to examData.answered_list.get(examData.answered_list.size - 1),
-                "answer_time" to test1
-            ).toString()
-        )
-
-    }
-
     fun pushEndButton() {
         if (isTouched) { //他のボタンが押されてない時だけ処理する
             return
@@ -311,7 +276,6 @@ class QuestionActivity : AppCompatActivity() {
                 }
                 .setNegativeButton("がんばる") { dialog, which ->
                     //何もしない
-
                 }.show()
         }
         return

@@ -176,37 +176,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
         image.setDefaultRecoad()
-
-//        テーブル内データ確認用
-//        Log.d("tete1",answers.find_answers(1).toString())
-//        Log.d("tete2",answers_rate.find_all_rate().toString())
-//        Log.d("tete3",exams_numbers.find_exams_numbers(1).toString())
-//        Log.d("tete4",exams_questions.find_all_questions(1,"FE2019S").toString())
-//        Log.d("tete5",genres.find_genre(1).toString())
-//        Log.d("tete6",image.find_image(1).toString())
-//        Log.d("tete7",questions.find_question(1).toString())
-//        Log.d("tete8",questions.find_comment(1).toString())
-//        Log.d("tete9",questions_genres.find_question_genres(1).toString())
-//        Log.d("tete0",questions_genres.find_genre_questions(1).toString())
-//        Log.d("test",exams_questions.find_exam_number_from_question_id(1))
         db.close()
         return true
-    }
-
-    //端末に登録されているトークンをAPIサーバに送信し、ユーザーIDを受け取る
-    fun get_user_id(token: String): Boolean {
-        var result: Boolean = true
-        ApiPostTask {
-            if (JSONObject(it).getString("status") != "E00") {
-                val e: SharedPreferences.Editor =
-                    getSharedPreferences("user_data", AppCompatActivity.MODE_PRIVATE).edit()
-                e.putString("user_id", JSONObject(it).getJSONObject("data").getString("user_id")).apply()
-
-            } else {
-                result = false
-            }
-        }.execute("add-user.php", hashMapOf("token" to token).toString())
-        return result
     }
 
     // 文字列中のHTLM特殊文字を変換して、変換後の文字列を返す
