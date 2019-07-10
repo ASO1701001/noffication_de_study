@@ -46,4 +46,6 @@ class QuestionStatisticsAdapter(internal var context: Context) : BaseAdapter() {
 
         return view
     }
+
+
 }

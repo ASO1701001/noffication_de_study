@@ -44,7 +44,7 @@ class LocalNotificationForegroundService : Service() {
         super.onStartCommand(intent, flags, startId)
 
         val notification = NotificationCompat.Builder(applicationContext, "channel_screen_question").apply {
-            setSmallIcon(R.drawable.ic_launcher_foreground)
+            setSmallIcon(R.mipmap.notification_de_study_logo7)
             setChannelId("channel_screen_question")
             setContentTitle("通知de勉強")
             setContentText("サービス作動中")

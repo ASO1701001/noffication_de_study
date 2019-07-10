@@ -1,5 +1,7 @@
 package jp.ac.asojuku.st.noffication_de_study
 
+
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -11,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_answer.*
 import org.jetbrains.anko.startActivity
 
 class AnswerActivity : AppCompatActivity() {
+
     lateinit var user_id: String
     lateinit var exam_data: ExamData
 
@@ -32,9 +35,16 @@ class AnswerActivity : AppCompatActivity() {
         AA_Back_BTN.setSafeClickListener {
             finish()
         }
+
+        AA_Next_BTN.setSafeClickListener {
+            finish()
+        }
+
+
     }
 
     fun at_first() {
+
         val questions = SQLiteHelper(this)
         val db = questions.readableDatabase
         val questionsDB = QuestionsOpenHelper(db)

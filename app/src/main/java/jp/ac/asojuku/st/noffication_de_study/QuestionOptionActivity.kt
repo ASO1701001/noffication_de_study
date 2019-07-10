@@ -2,6 +2,7 @@ package jp.ac.asojuku.st.noffication_de_study
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import jp.ac.asojuku.st.noffication_de_study.db.ExamsQuestionsOpenHelper
 import jp.ac.asojuku.st.noffication_de_study.db.QuestionsGenresOpenHelper
 import kotlinx.android.synthetic.main.activity_question_option.*
@@ -9,7 +10,7 @@ import org.jetbrains.anko.startActivity
 import java.util.*
 import kotlin.collections.ArrayList
 
-//TODO 問題オプション画面：おおよそ完成（90%）
+//TODO 問題オプション画面：おおよそ完成（99%）
 class QuestionOptionActivity : AppCompatActivity() {
 
     //TODO 定数の値はすべて仮の値
@@ -34,6 +35,34 @@ class QuestionOptionActivity : AppCompatActivity() {
         }
         QOA_Back_BTN.setSafeClickListener {
             finish()
+        }
+        QOA_Select_Exam_BTN.setSafeClickListener {
+            if(QOA_Select_Exam_LL.visibility == View.VISIBLE){
+                QOA_Select_Exam_LL.visibility = View.GONE
+            }else{
+                QOA_Select_Exam_LL.visibility = View.VISIBLE
+            }
+        }
+        QOA_Select_Genres_BTN.setSafeClickListener {
+            if(QOA_Select_Genres_LL.visibility == View.VISIBLE){
+                QOA_Select_Genres_LL.visibility = View.GONE
+            }else{
+                QOA_Select_Genres_LL.visibility = View.VISIBLE
+            }
+        }
+        QOA_Select_Amount_BTN.setSafeClickListener {
+            if(QOA_Question_Amount_BOX.visibility == View.VISIBLE){
+                QOA_Question_Amount_BOX.visibility = View.GONE
+            }else{
+                QOA_Question_Amount_BOX.visibility = View.VISIBLE
+            }
+        }
+        QOA_Select_Method_BTN.setSafeClickListener {
+            if(QOA_Select_Method_Group.visibility == View.VISIBLE){
+                QOA_Select_Method_Group.visibility = View.GONE
+            }else{
+                QOA_Select_Method_Group.visibility = View.VISIBLE
+            }
         }
     }
 
