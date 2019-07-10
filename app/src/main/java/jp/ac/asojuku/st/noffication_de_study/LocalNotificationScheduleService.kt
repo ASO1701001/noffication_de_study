@@ -129,10 +129,10 @@ class LocalNotificationScheduleService : BroadcastReceiver() {
         contentView.setTextViewText(R.id.notifiText, questionText)
 
         contentView.setTextColor(R.id.notifiText, Color.DKGRAY)
-        contentView.setTextColor(R.id.notifyButton, Color.DKGRAY)
-        contentView.setTextColor(R.id.notifyButton2, Color.DKGRAY)
-        contentView.setTextColor(R.id.notifyButton3, Color.DKGRAY)
-        contentView.setTextColor(R.id.notifyButton4, Color.DKGRAY)
+        contentView.setTextColor(R.id.notifyButton, Color.WHITE)
+        contentView.setTextColor(R.id.notifyButton2, Color.WHITE)
+        contentView.setTextColor(R.id.notifyButton3, Color.WHITE)
+        contentView.setTextColor(R.id.notifyButton4, Color.WHITE)
 
 
         // 表示内容を生成
