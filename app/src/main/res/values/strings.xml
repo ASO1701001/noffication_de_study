@@ -23,6 +23,11 @@
     <string name="AA_Seigo_Text_Str">正誤</string>
     <string name="QA_maru_BTN_Str">◯</string>
     <string name="QA_batu_BTN_Str">☓</string>
+    <string name="QOA_Title_Text_Str">出題オプション</string>
+    <string name="QOA_option1_Text_Str">試験回選択</string>
+    <string name="QOA_Option2_Text_Str">ジャンル選択</string>
+    <string name="QOA_Option3_Text_Str">問題数選択</string>
+    <string name="QOA_option4_Text">出題方法</string>
     <string-array name="OA_Noffication_Interval_list">
         <item>5</item>
         <item>10</item>
