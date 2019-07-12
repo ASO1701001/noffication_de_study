@@ -195,10 +195,10 @@ class LocalNotificationScheduleService : BroadcastReceiver() {
 
         examData.set_list_data(arrayListOf(questionId))
         val pendingIntent = PendingIntent.getActivity(
-            context, 777, Intent(
+            context, (Math.random() * 100000).toInt(), Intent(
                 context,
                 QuestionActivity::class.java
-            ).putExtra("exam_data", examData), 0
+            ).putExtra("exam_data", examData), PendingIntent.FLAG_UPDATE_CURRENT
         )
 
         val spEditor = context.getSharedPreferences("user_data", MODE_PRIVATE).edit()
