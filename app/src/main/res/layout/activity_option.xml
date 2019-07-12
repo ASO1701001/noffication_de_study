@@ -20,7 +20,8 @@
             android:layout_height="wrap_content" app:srcCompat="@android:drawable/ic_menu_revert"
             android:id="@+id/OA_Back_BTN"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp" android:layout_marginTop="8dp"/>
+            android:layout_marginStart="8dp" android:layout_marginTop="8dp"
+            style="@style/Widget.AppCompat.Button.Colored"/>
     <ScrollView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
