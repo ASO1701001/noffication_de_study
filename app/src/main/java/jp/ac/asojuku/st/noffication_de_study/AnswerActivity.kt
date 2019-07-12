@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import jp.ac.asojuku.st.noffication_de_study.db.AnswersOpenHelper
 import jp.ac.asojuku.st.noffication_de_study.db.ExamsQuestionsOpenHelper
@@ -19,7 +20,6 @@ class AnswerActivity : AppCompatActivity() {
 
     var question_id = -1
     lateinit var exam_number:String
-    var answer_num: Int? = 999999
     var answer_text: String? = ""
 
 
@@ -94,11 +94,19 @@ class AnswerActivity : AppCompatActivity() {
         //出題年度を表示
         answer_examNumber_text.setText(exam_number)
 
-        //正解を取得
+        //正解を取得。○×問題の場合は処理を分ける
         var answerList = answersDB.find_answers(question_id)
-        var sentakusi = listOf("ア", "イ", "ウ", "エ")
-        var answerNo = answerList!!.get(1)
-        var answer: String = sentakusi[answerNo]
+        var answer = ""
+        var sentakusi = listOf<String>()
+        if(exam_data.mac!=4) {
+            sentakusi = listOf("ア", "イ", "ウ", "エ")
+            var answerNo = answerList!!.get(1)
+            answer = sentakusi[answerNo]
+        }else{
+            sentakusi = listOf("○","×")
+            var answerNo = answerList!!.get(1)-1
+            answer = sentakusi[answerNo]
+        }
 
 
 
@@ -111,10 +119,26 @@ class AnswerActivity : AppCompatActivity() {
         //TODO:DB側が作成されたら更新
 //        examNumbers += "試験回" + BR
 
-        //自分の解答と、正しい解答の文字列を生成
-        var myAnswerInt = exam_data.answered_list[exam_data.answered_list.size-1] //自分の解答の番号
-        var myAnswerStr = sentakusi[myAnswerInt]
-        var myAnswerIsCorrected = exam_data.isCorrect_list[exam_data.isCorrect_list.size-1]
+        //自分の解答と、正しい解答の文字列を生成。○×問題の場合は、処理を分ける
+        var myAnswerInt = 0
+        var myAnswerStr = ""
+        var myAnswerIsCorrected = false
+        if(exam_data.mac!=4) {
+            myAnswerInt = exam_data.answered_list[exam_data.answered_list.size - 1] //自分の解答の番号
+            myAnswerStr = sentakusi[myAnswerInt - 1]
+            myAnswerIsCorrected = exam_data.isCorrect_list[exam_data.isCorrect_list.size - 1]
+        }else{
+            myAnswerInt = getSharedPreferences("user_data", MODE_PRIVATE).getInt("user_answer",0)
+            val answer = answersDB.find_answers(question_id)!![0]
+            if(myAnswerInt == answer){
+                myAnswerIsCorrected = true
+            }
+            if(answer==1){
+                myAnswerStr = "○"
+            }else{
+                myAnswerStr = "×"
+            }
+        }
 
         //正解か不正解かを設定
         var isCorrectStr = "不正解!!!!"
@@ -126,7 +150,7 @@ class AnswerActivity : AppCompatActivity() {
         }
         AA_AnsweResult_Text.setText(isCorrectStr)
 
-        var answerStr = "自分の解答："+ myAnswerStr + BR + "正解 : " + answer
+        var answerStr = "自分の回答："+ myAnswerStr + BR + "正解 : " + answer
 
         answer_examNumber_text.setText(exam_data.number)
         answer_question_correct_text.setText(answerStr)

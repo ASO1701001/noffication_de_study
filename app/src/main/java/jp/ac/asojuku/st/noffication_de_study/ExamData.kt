@@ -3,7 +3,7 @@ package jp.ac.asojuku.st.noffication_de_study
 import java.io.Serializable
 
 class ExamData (mac:Int, name:String, number:String):Serializable{
-    //製造元番号　1:QuestionOptionActivity 2:StaticsActivity 3:4択 4:○×
+    //製造元番号　1:QuestionOptionActivity 2:StaticsActivity image_1:4択 4:○×
     val mac = mac
     //試験名 FEとか
     val name = name
