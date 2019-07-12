@@ -1,8 +1,12 @@
 package jp.ac.asojuku.st.noffication_de_study
 
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.support.v4.app.NotificationCompat
 import android.widget.Toast
 
 class LocalNotificationTwoReceiver : BroadcastReceiver() {
@@ -29,11 +33,62 @@ class LocalNotificationTwoReceiver : BroadcastReceiver() {
         if (questionAnswer == 0) {
             return Toast.makeText(context, "採点できませんでした", Toast.LENGTH_LONG).show()
         }
-        if (userAnswer == questionAnswer) {
-            Toast.makeText(context, "正解です！", Toast.LENGTH_LONG).show()
+        val markingResult = if (userAnswer == questionAnswer) {
+            "正解です！"
         } else {
-            Toast.makeText(context, "外れです！", Toast.LENGTH_LONG).show()
+            "外れです..."
         }
+
+        val examData = ExamData(4, "FE", "FE10901")
+        examData.set_list_data(arrayListOf(questionId))
+        val pendingIntent = PendingIntent.getActivity(
+            context, 777, Intent(
+                context,
+                QuestionActivity::class.java
+            ).putExtra("exam_data", examData), 0
+        )
+
+        val notificationId = intent.getIntExtra("notification_id", 0)
+        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notification = NotificationCompat.Builder(context, "channel_two_question")
+            .setSmallIcon(R.mipmap.notification_de_study_logo7)
+            .setChannelId("channel_two_question")
+            .setContentTitle("回答結果")
+            .setContentText(markingResult)
+            .setContentIntent(pendingIntent)
+            .setColor(Color.BLUE)
+            .addAction(
+                R.mipmap.ic_launcher,
+                "もう一度解く",
+                PendingIntent.getActivity(
+                    context,
+                    (Math.random() * 100000).toInt(),
+                    Intent(context, QuestionActivity::class.java).apply {
+                        val questionExamData = ExamData(4, "FE", "FE10901")
+                        questionExamData.set_list_data(arrayListOf(questionId))
+                        putExtra("exam_data", questionExamData)
+                    },
+                    PendingIntent.FLAG_UPDATE_CURRENT
+                )
+            )
+            .addAction(
+                R.mipmap.ic_launcher,
+                "回答画面へ",
+                PendingIntent.getActivity(
+                    context,
+                    (Math.random() * 100000).toInt(),
+                    Intent(context, AnswerActivity::class.java).apply {
+                        val answerExamData = ExamData(4, "FE", "FE10901")
+                        answerExamData.set_list_data(arrayListOf(questionId))
+                        answerExamData.question_current = questionId
+                        answerExamData.question_next = questionId
+                        putExtra("exam_data", answerExamData)
+                    },
+                    PendingIntent.FLAG_UPDATE_CURRENT
+                )
+            )
+            .build()
+        notificationManager.notify(notificationId, notification)
     }
 
 }

@@ -134,7 +134,6 @@ class LocalNotificationScheduleService : BroadcastReceiver() {
         contentView.setTextColor(R.id.notifyButton3, Color.DKGRAY)
         contentView.setTextColor(R.id.notifyButton4, Color.DKGRAY)
 
-
         // 表示内容を生成
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val notification = NotificationCompat.Builder(context, "channel_four_question")
@@ -228,6 +227,7 @@ class LocalNotificationScheduleService : BroadcastReceiver() {
                         action = "1"
                         putExtra("question_id", questionId)
                         putExtra("user_answer", 1)
+                        putExtra("notification_id", notificationId)
                     },
                     PendingIntent.FLAG_UPDATE_CURRENT
                 )
@@ -242,6 +242,7 @@ class LocalNotificationScheduleService : BroadcastReceiver() {
                         action = "2"
                         putExtra("question_id", questionId)
                         putExtra("user_answer", 2)
+                        putExtra("notification_id", notificationId)
                     },
                     PendingIntent.FLAG_UPDATE_CURRENT
                 )
