@@ -7,7 +7,8 @@
 
     <application
             android:allowBackup="true"
-            android:icon="@mipmap/notification_de_study_logo7"
+            android:icon="@mipmap/notification_de_study_logo8"
+            android:roundIcon="@mipmap/notification_de_study_logo9"
             android:label="@string/app_name"
             android:supportsRtl="true"
             android:theme="@style/NoActionBar_NoMultiTup">
