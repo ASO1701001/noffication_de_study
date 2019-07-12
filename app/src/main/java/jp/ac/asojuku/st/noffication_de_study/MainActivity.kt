@@ -95,6 +95,8 @@ class MainActivity : AppCompatActivity() {
         val questions = QuestionsOpenHelper(db)
         val questions_genres = QuestionsGenresOpenHelper(db)
 
+        image.setDefaultRecoad()
+
         var jArray = json.getJSONArray("answer_db")
         if (jArray != {}) {
             for (i in 0 until jArray.length()) {

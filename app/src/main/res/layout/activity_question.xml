@@ -99,8 +99,8 @@
                     android:paddingEnd="8dp" android:paddingBottom="8dp"/>
             <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" tools:srcCompat="@tools:sample/avatars"
-                    android:id="@+id/question_image"/>
+                    android:layout_height="wrap_content" tools:srcCompat="@drawable/image_5"
+                    android:id="@+id/question_image" android:adjustViewBounds="true"/>
         </LinearLayout>
     </ScrollView>
     <Button
