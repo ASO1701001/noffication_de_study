@@ -132,12 +132,12 @@
             android:id="@+id/QA_TwoAnswers">
         <Button
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/QA_maru_BTN" android:layout_weight="1"
+                android:layout_height="match_parent" android:id="@+id/QA_maru_BTN" android:layout_weight="1"
                 style="@style/Widget.AppCompat.Button.Colored" android:text="@string/QA_maru_BTN_Str"
                 android:textSize="24sp"/>
         <Button
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/QA_batu_BTN" android:layout_weight="1"
+                android:layout_height="match_parent" android:id="@+id/QA_batu_BTN" android:layout_weight="1"
                 style="@style/Widget.AppCompat.Button.Colored" android:text="@string/QA_batu_BTN_Str"/>
     </LinearLayout>
     <ImageView
