@@ -42,30 +42,30 @@ class AnswerActivity : AppCompatActivity() {
         val questionsDB = QuestionsOpenHelper(db)
         val examsquestionDB = ExamsQuestionsOpenHelper(db)
         when (exam_data.mac) {
-            //QuestionOptionActivityから
+            // QuestionOptionActivityから
             1 -> {
                 AA_Next_BTN.setSafeClickListener {
                     startActivity<QuestionActivity>("exam_data" to exam_data)
                 }
                 AA_Next_BTN.visibility = View.VISIBLE
             }
-            //FragmentQuestion.ktから
+            // FragmentQuestion.ktから
             2 -> {
-                AA_Next_BTN.setText("統計に戻る")
+                AA_Next_BTN.text = "統計に戻る"
                 AA_Next_BTN.setSafeClickListener {
                     finish()
                 }
             }
-            //4択通知から
+            // 4択通知から
             3 -> {
-                AA_Next_BTN.setText("戻る")
+                AA_Next_BTN.text = "戻る"
                 AA_Next_BTN.setSafeClickListener {
                     finish()
                 }
             }
-            //○×から
+            // ○×から
             4 -> {
-                AA_Next_BTN.setText("戻る")
+                AA_Next_BTN.text = "戻る"
                 AA_Next_BTN.setSafeClickListener {
                     finish()
                 }
@@ -83,31 +83,33 @@ class AnswerActivity : AppCompatActivity() {
         val questionsDB = QuestionsOpenHelper(db)
         val answersDB = AnswersOpenHelper(db)
 
-        //出題年度を表示
-        answer_examNumber_text.setText(exam_number)
+        // 出題年度を表示
+        answer_examNumber_text.text = exam_number
 
-        //正解を取得。○×問題の場合は処理を分ける
-        var answerList = answersDB.find_answers(question_id)
+        // 正解を取得。○×問題の場合は処理を分ける
+        val answerList = answersDB.find_answers(question_id)
         var answer = ""
         var sentakusi = listOf<String>()
         if (exam_data.mac != 4) {
             sentakusi = listOf("ア", "イ", "ウ", "エ")
-            var answerNo = answerList!!.get(1)
+            val answerNo = answerList!![1]
             answer = sentakusi[answerNo]
         } else {
             sentakusi = listOf("○", "×")
-            var answerNo = answerList!!.get(1) - 1
+            val answerNo = answerList!![1] - 1
             answer = sentakusi[answerNo]
         }
 
-        //改行コードの取得//
+        // 改行コードの取得//
         val BR: String = System.getProperty("line.separator")
         var examNumbers: String = ""
-//        for (i in 0..examNumberList!!.size-1){
-//            examNumbers += examNumberList[i] + BR
-//        }
-        //TODO:DB側が作成されたら更新
-//        examNumbers += "試験回" + BR
+        /*
+        for (i in 0..examNumberList!!.size - 1) {
+            examNumbers += examNumberList[i] + BR
+        }
+        */
+        // TODO:DB側が作成されたら更新
+        // examNumbers += "試験回" + BR
 
         //自分の解答と、正しい解答の文字列を生成。○×問題の場合は、処理を分ける
         var myAnswerInt = 0
@@ -138,12 +140,12 @@ class AnswerActivity : AppCompatActivity() {
             AA_AnsweResult_Text.setTextColor(Color.argb(255, 0, 128, 0))
 
         }
-        AA_AnsweResult_Text.setText(isCorrectStr)
+        AA_AnsweResult_Text.text = isCorrectStr
 
-        var answerStr = "自分の回答：" + myAnswerStr + BR + "正解 : " + answer
+        val answerStr = "自分の回答：" + myAnswerStr + BR + "正解 : " + answer
 
-        answer_examNumber_text.setText(exam_data.number)
-        answer_question_correct_text.setText(answerStr)
-        AA_answerComment_text.setText(questionsDB.find_comment(question_id)?.get(1))
+        answer_examNumber_text.text = exam_data.number
+        answer_question_correct_text.text = answerStr
+        AA_answerComment_text.text = questionsDB.find_comment(question_id)?.get(1)
     }
 }
