@@ -26,7 +26,6 @@ class QuestionStatisticsAdapter(internal var context: Context) : BaseAdapter() {
         } catch (e: Exception) {
             0
         }
-        // return statisticsItem.size
     }
 
     override fun getItem(position: Int): Any {
