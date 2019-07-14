@@ -33,14 +33,14 @@ class TitleActivity : AppCompatActivity() {
         val userId = data.getString("user_id", "0")
     }
 
-    //Android端末側の戻るボタンを押した時の処理を上書き
+    // Android端末側の戻るボタンを押した時の処理を上書き
     override fun onBackPressed() {
         val builder = AlertDialog.Builder(this)
         builder.setMessage("終了しますか？")
-            .setPositiveButton("はい") { dialog, which ->
+            .setPositiveButton("はい") { _, _ ->
                 super.onBackPressed()
             }.show()
-        return //バックキーを押した時に反応しないようにする
+        return // バックキーを押した時に反応しないようにする
 
     }
 
