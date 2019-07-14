@@ -1,7 +1,6 @@
 package jp.ac.asojuku.st.noffication_de_study
 
 import android.os.AsyncTask
-import android.util.Log
 import okhttp3.FormBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -39,7 +38,6 @@ class ApiPostTask(var callback: (String?) -> Unit) : AsyncTask<String, Unit, Str
 
             return response.body()!!.string()
         } catch (e: Exception) {
-            Log.d("ERROR", e.toString())
             return null
         }
     }
