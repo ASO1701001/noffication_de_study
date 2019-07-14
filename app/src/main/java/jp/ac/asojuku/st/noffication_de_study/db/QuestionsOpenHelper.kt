@@ -8,13 +8,13 @@ import android.database.sqlite.SQLiteDatabase
 class QuestionsOpenHelper(var db: SQLiteDatabase) {
     val tableName: String = "questions"
 
-    //問題idを渡して、出題に利用する情報を取得
+    // 問題idを渡して、出題に利用する情報を取得
     fun find_question(question_id: Int): ArrayList<String>? {
         val query = "SELECT * FROM $tableName where question_id = $question_id"
         val cursor = db.rawQuery(query, null)
 
         val array = ArrayList<String>()
-        return try{
+        return try {
             cursor.moveToFirst()
             array.add(cursor.getString(0).toString())
             array.add(cursor.getString(1).toString())
@@ -28,13 +28,13 @@ class QuestionsOpenHelper(var db: SQLiteDatabase) {
         }
     }
 
-    //問題idを渡して、解説に必要な情報を取得
+    // 問題idを渡して、解説に必要な情報を取得
     fun find_comment(question_id: Int): ArrayList<String>? {
         val query = "SELECT * FROM $tableName where question_id = $question_id"
         val cursor = db.rawQuery(query, null)
 
         val array = ArrayList<String>()
-        return try{
+        return try {
             cursor.moveToFirst()
             array.add(cursor.getString(0).toString())
             array.add(cursor.getString(3).toString())
@@ -54,7 +54,7 @@ class QuestionsOpenHelper(var db: SQLiteDatabase) {
         values.put("is_have_image", c)
         values.put("comment", d)
         values.put("update_date", e)
-        values.put("question_flag",question_flag)
+        values.put("question_flag", question_flag)
 
         try {
             db.insertOrThrow(tableName, null, values)
