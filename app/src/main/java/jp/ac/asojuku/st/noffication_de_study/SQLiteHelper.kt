@@ -9,7 +9,6 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, 
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL("CREATE TABLE answers ( question_id INTEGER, answer_number INTEGER, PRIMARY KEY(question_id,answer_number) )")
         db.execSQL("CREATE TABLE answers_rate ( question_id int not null constraint answers_rate_pk primary key, answer_rate real )")
-        // db.execSQL("CREATE TABLE correct_answer ( question_id int not null constraint correct_answer_pk primary key, correct_answer_number int )")
         db.execSQL("CREATE TABLE exams ( exam_id INTEGER PRIMARY KEY, exam_name TEXT )")
         db.execSQL("CREATE TABLE exams_numbers ( exam_id INTEGER, exams_number TEXT, primary key (exam_id, exams_number) )")
         db.execSQL("CREATE TABLE exams_questions ( exams_id INTEGER, exams_number TEXT, question_id INTEGER, question_number INTEGER, primary key (exams_id, exams_number, question_id, question_number) )")
@@ -24,7 +23,6 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.execSQL("DROP TABLE IF EXISTS answers")
         db.execSQL("DROP TABLE IF EXISTS answers_rate")
-        // db.execSQL("DROP TABLE IF EXISTS correct_answer")
         db.execSQL("DROP TABLE IF EXISTS exams")
         db.execSQL("DROP TABLE IF EXISTS exams_numbers")
         db.execSQL("DROP TABLE IF EXISTS exams_questions")
@@ -36,13 +34,6 @@ class SQLiteHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, 
 
         onCreate(db)
     }
-
-    /*
-    // データベースが開かれた時に実行される処理
-    override fun onOpen(db: SQLiteDatabase) {
-        super.onOpen(db)
-    }
-    */
 
     companion object {
         // データベースの名前
