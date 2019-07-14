@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase
 class AnswersOpenHelper(var db: SQLiteDatabase) {
     val tableName: String = "answers"
 
-    //問題idを受け取って、対応する答えの選択肢を返す
+    // 問題idを受け取って、対応する答えの選択肢を返す
     fun find_answers(question_id: Int): ArrayList<Int>? {
 
         val query = "SELECT * FROM $tableName where question_id = $question_id"
