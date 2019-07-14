@@ -33,7 +33,8 @@ class ExamsQuestionsOpenHelper(var db: SQLiteDatabase) {
             null
         }
     }
-    fun find_all_questions_from_exam_number(exams_number: String):ArrayList<Int>?{
+
+    fun find_all_questions_from_exam_number(exams_number: String): ArrayList<Int>? {
         val query =
             "SELECT * FROM $tableName where exams_number = '$exams_number'"
         val cursor = db.rawQuery(query, null)
@@ -53,7 +54,8 @@ class ExamsQuestionsOpenHelper(var db: SQLiteDatabase) {
             null
         }
     }
-    fun find_exam_number_from_question_id(question_id: Int):String?{
+
+    fun find_exam_number_from_question_id(question_id: Int): String? {
         val query =
             "SELECT * FROM $tableName where question_id = $question_id"
         val cursor = db.rawQuery(query, null)

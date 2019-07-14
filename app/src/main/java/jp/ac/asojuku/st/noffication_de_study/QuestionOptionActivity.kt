@@ -7,16 +7,11 @@ import jp.ac.asojuku.st.noffication_de_study.db.ExamsQuestionsOpenHelper
 import jp.ac.asojuku.st.noffication_de_study.db.QuestionsGenresOpenHelper
 import kotlinx.android.synthetic.main.activity_question_option.*
 import org.jetbrains.anko.startActivity
-import java.util.*
-import kotlin.collections.ArrayList
 
 //TODO 問題オプション画面：おおよそ完成（99%）
 class QuestionOptionActivity : AppCompatActivity() {
-
     //TODO 定数の値はすべて仮の値
     val user_id = 12345678
-
-    // テスト
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +23,7 @@ class QuestionOptionActivity : AppCompatActivity() {
             val QuestionsArrayList = ld.first
             val ExamName = ld.second
 
-            var exam_data = ExamData(1, "FE", ExamName)
+            val exam_data = ExamData(1, "FE", ExamName)
             exam_data.set_list_data(QuestionsArrayList)
 
             startActivity<QuestionActivity>("exam_data" to exam_data)
@@ -37,45 +32,45 @@ class QuestionOptionActivity : AppCompatActivity() {
             finish()
         }
         QOA_Select_Exam_BTN.setSafeClickListener {
-            if(QOA_Select_Exam_LL.visibility == View.VISIBLE){
+            if (QOA_Select_Exam_LL.visibility == View.VISIBLE) {
                 QOA_Select_Exam_LL.visibility = View.GONE
-            }else{
+            } else {
                 QOA_Select_Exam_LL.visibility = View.VISIBLE
             }
         }
         QOA_Select_Genres_BTN.setSafeClickListener {
-            if(QOA_Select_Genres_LL.visibility == View.VISIBLE){
+            if (QOA_Select_Genres_LL.visibility == View.VISIBLE) {
                 QOA_Select_Genres_LL.visibility = View.GONE
-            }else{
+            } else {
                 QOA_Select_Genres_LL.visibility = View.VISIBLE
             }
         }
         QOA_Select_Amount_BTN.setSafeClickListener {
-            if(QOA_Question_Amount_BOX.visibility == View.VISIBLE){
+            if (QOA_Question_Amount_BOX.visibility == View.VISIBLE) {
                 QOA_Question_Amount_BOX.visibility = View.GONE
-            }else{
+            } else {
                 QOA_Question_Amount_BOX.visibility = View.VISIBLE
             }
         }
         QOA_Select_Method_BTN.setSafeClickListener {
-            if(QOA_Select_Method_Group.visibility == View.VISIBLE){
+            if (QOA_Select_Method_Group.visibility == View.VISIBLE) {
                 QOA_Select_Method_Group.visibility = View.GONE
-            }else{
+            } else {
                 QOA_Select_Method_Group.visibility = View.VISIBLE
             }
         }
     }
 
-    //選択肢を読み込む
-    fun loadChoice(): Pair<ArrayList<Int>, String> {
+    // 選択肢を読み込む
+    private fun loadChoice(): Pair<ArrayList<Int>, String> {
         // ランダム出題するかどうか
         // ランダム出題の場合、randomBooleanの中身がtrueに
         val randomBoolean = QOA_Select_Method_Random_RBTN.isChecked
 
         // 問題数スピナーから問題数を取得する
-        val SpinnerStr: String = QOA_Question_Amount_BOX.getSelectedItem().toString()
-        var testList = SpinnerStr.split("問")
-        var SpinnerNum: Int = Integer.parseInt(testList[0])
+        val SpinnerStr: String = QOA_Question_Amount_BOX.selectedItem.toString()
+        val testList = SpinnerStr.split("問")
+        val SpinnerNum: Int = Integer.parseInt(testList[0])
 
         // 問題DBの生成
         val questions = SQLiteHelper(this)
@@ -85,7 +80,7 @@ class QuestionOptionActivity : AppCompatActivity() {
         // 出題年度ごとの問題の読み込み
         val EQOH = ExamsQuestionsOpenHelper(db)
         var TempYear: ArrayList<ArrayList<Int>>?
-        var TempYear_list: ArrayList<ArrayList<ArrayList<Int>>?> = ArrayList(ArrayList(ArrayList()))
+        val TempYear_list: ArrayList<ArrayList<ArrayList<Int>>?> = ArrayList(ArrayList(ArrayList()))
 
         // 出題年度が選択されなかった場合、「"empty"」のままに、年度が1つしか選ばれなかった場合、ExamNameFlgは1になる
         // 複数選択された場合、ExamNameFlgは2以外になる
@@ -161,15 +156,15 @@ class QuestionOptionActivity : AppCompatActivity() {
 
         // 取得した問題から全てのArrayListに存在するものを書き出す
         // ArrayListのTempQuestionsに出題する問題を格納する
-        var TempQuestions = ArrayList<Int>()
+        val TempQuestions = ArrayList<Int>()
 
         if (genre1_Questions != null || genre2_Questions != null) {
             if (genre1_Questions != null) {
                 for (ty in TempYear_list) {
                     for (i in 0..ty!!.size) {
-                        for (j in 0..genre1_Questions.size - 1) {
-                            if (genre1_Questions.get(j) == ty.get(i).get(0)) {
-                                TempQuestions.add(genre1_Questions.get(j))
+                        for (j in 0 until genre1_Questions.size) {
+                            if (genre1_Questions[j] == ty[i][0]) {
+                                TempQuestions.add(genre1_Questions[j])
                             }
                         }
                     }
@@ -178,10 +173,10 @@ class QuestionOptionActivity : AppCompatActivity() {
 
             if (genre2_Questions != null) {
                 for (ty in TempYear_list) {
-                    for (i in 0..ty!!.size - 1) {
-                        for (j in 0..genre2_Questions.size - 1) {
-                            if (genre2_Questions.get(j) == ty.get(i).get(0)) {
-                                TempQuestions.add(genre2_Questions.get(j))
+                    for (i in 0 until ty!!.size) {
+                        for (j in 0 until genre2_Questions.size) {
+                            if (genre2_Questions[j] == ty[i][0]) {
+                                TempQuestions.add(genre2_Questions[j])
                             }
                         }
                     }
@@ -189,26 +184,28 @@ class QuestionOptionActivity : AppCompatActivity() {
             }
         } else {
             for (ty in TempYear_list) {
-                for (i in 0..ty!!.size - 1) {
-                    TempQuestions.add(ty.get(i).get(0))
+                for (i in 0 until ty!!.size) {
+                    TempQuestions.add(ty[i][0])
                 }
             }
         }
 
         // ランダム出題するか、そうじゃないかで問題順を並び替える
         if (QOA_Select_Method_Random_RBTN.isChecked) {
-            Collections.shuffle(TempQuestions)
+            TempQuestions.shuffle()
         }
 
         // 問題数に応じて問題を選択する
-        var QuestionsArrayList = ArrayList<Int>()
-//        for (tq in TempQuestions) {
-//            for (i in 0..SpinnerNum - 1) {
-//                QuestionsArrayList.add(tq)
-//            }
-//        }
+        val QuestionsArrayList = ArrayList<Int>()
+        /*
+        for (tq in TempQuestions) {
+            for (i in 0..SpinnerNum - 1) {
+                QuestionsArrayList.add(tq)
+            }
+        }
+        */
 
-        for (i in 0..SpinnerNum - 1) {
+        for (i in 0 until SpinnerNum) {
             QuestionsArrayList.add(TempQuestions[i])
         }
 
