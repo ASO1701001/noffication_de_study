@@ -24,11 +24,11 @@ class UserAnswersOpenHelper(var db: SQLiteDatabase) {
                 bufferlist.add(cursor.getString(2).toString())
                 bufferlist.add(cursor.getString(3).toString())
                 array.add(bufferlist)
-                cursor.moveToNext();
+                cursor.moveToNext()
             }
             cursor.close()
             if (array.size == 0) {
-                null
+                return null
             }
             array
         } catch (e: CursorIndexOutOfBoundsException) {
@@ -53,11 +53,11 @@ class UserAnswersOpenHelper(var db: SQLiteDatabase) {
                 bufferlist.add(cursor.getString(2).toString())
                 bufferlist.add(cursor.getString(3).toString())
                 array.add(bufferlist)
-                cursor.moveToNext();
+                cursor.moveToNext()
             }
             cursor.close()
             if (array.size == 0) {
-                null
+                return null
             }
             return array
         } catch (e: CursorIndexOutOfBoundsException) {
