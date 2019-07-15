@@ -82,6 +82,7 @@ class LocalNotificationTwoReceiver : BroadcastReceiver() {
                         answerExamData.set_list_data(arrayListOf(questionId))
                         answerExamData.question_current = questionId
                         answerExamData.question_next = questionId
+                        answerExamData.answered_list.add(userAnswer)
                         putExtra("exam_data", answerExamData)
                     },
                     PendingIntent.FLAG_UPDATE_CURRENT
