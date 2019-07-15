@@ -142,10 +142,11 @@ class LocalNotificationScheduleService : BroadcastReceiver() {
             .setContentTitle("問題です")
             .setContentIntent(piQuestion)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setAutoCancel(true)
             .build()
 
         // 表示
-        notificationManager.notify(questionId, notification)
+        notificationManager.notify(999, notification)
     }
 
     // 四択問題の正誤判定

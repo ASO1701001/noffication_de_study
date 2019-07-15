@@ -109,15 +109,15 @@ class AnswerActivity : AppCompatActivity() {
         var myAnswerIsCorrected = false
         if (exam_data.mac != 4) {
             myAnswerInt = exam_data.answered_list[exam_data.answered_list.size - 1] // 自分の解答の番号
-            myAnswerStr = sentakusi[myAnswerInt - 1]
+            myAnswerStr = sentakusi[myAnswerInt]
             myAnswerIsCorrected = exam_data.isCorrect_list[exam_data.isCorrect_list.size - 1]
         } else {
-            myAnswerInt = getSharedPreferences("user_data", MODE_PRIVATE).getInt("user_answer", 0)
-            val answer = answersDB.find_answers(question_id)!![0]
+            myAnswerInt = exam_data.answered_list[exam_data.answered_list.size - 1]
+            val answer = answersDB.find_answers(question_id)!![1]
             if (myAnswerInt == answer) {
                 myAnswerIsCorrected = true
             }
-            myAnswerStr = if (answer == 1) {
+            myAnswerStr = if (myAnswerInt == 1) {
                 "○"
             } else {
                 "×"
