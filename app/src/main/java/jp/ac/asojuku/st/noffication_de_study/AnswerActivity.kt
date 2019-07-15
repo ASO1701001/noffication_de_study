@@ -36,7 +36,7 @@ class AnswerActivity : AppCompatActivity() {
         }
     }
 
-    fun at_first() {
+    private fun at_first() {
         val questions = SQLiteHelper(this)
         val db = questions.readableDatabase
         val questionsDB = QuestionsOpenHelper(db)
@@ -77,7 +77,7 @@ class AnswerActivity : AppCompatActivity() {
         print_answer()
     }
 
-    fun print_answer() {
+    private fun print_answer() {
         val questions = SQLiteHelper(this)
         val db = questions.readableDatabase
         val questionsDB = QuestionsOpenHelper(db)
@@ -88,8 +88,8 @@ class AnswerActivity : AppCompatActivity() {
 
         // 正解を取得。○×問題の場合は処理を分ける
         val answerList = answersDB.find_answers(question_id)
-        var answer = ""
-        var sentakusi = listOf<String>()
+        val answer: String
+        val sentakusi: List<String>
         if (exam_data.mac != 4) {
             sentakusi = listOf("ア", "イ", "ウ", "エ")
             val answerNo = answerList!![1]
@@ -100,23 +100,15 @@ class AnswerActivity : AppCompatActivity() {
             answer = sentakusi[answerNo]
         }
 
-        // 改行コードの取得//
+        // 改行コードの取得
         val BR: String = System.getProperty("line.separator")
-        var examNumbers: String = ""
-        /*
-        for (i in 0..examNumberList!!.size - 1) {
-            examNumbers += examNumberList[i] + BR
-        }
-        */
-        // TODO:DB側が作成されたら更新
-        // examNumbers += "試験回" + BR
 
-        //自分の解答と、正しい解答の文字列を生成。○×問題の場合は、処理を分ける
-        var myAnswerInt = 0
-        var myAnswerStr = ""
+        // 自分の解答と、正しい解答の文字列を生成。○×問題の場合は、処理を分ける
+        val myAnswerInt: Int
+        val myAnswerStr: String
         var myAnswerIsCorrected = false
         if (exam_data.mac != 4) {
-            myAnswerInt = exam_data.answered_list[exam_data.answered_list.size - 1] //自分の解答の番号
+            myAnswerInt = exam_data.answered_list[exam_data.answered_list.size - 1] // 自分の解答の番号
             myAnswerStr = sentakusi[myAnswerInt - 1]
             myAnswerIsCorrected = exam_data.isCorrect_list[exam_data.isCorrect_list.size - 1]
         } else {
@@ -125,14 +117,14 @@ class AnswerActivity : AppCompatActivity() {
             if (myAnswerInt == answer) {
                 myAnswerIsCorrected = true
             }
-            if (answer == 1) {
-                myAnswerStr = "○"
+            myAnswerStr = if (answer == 1) {
+                "○"
             } else {
-                myAnswerStr = "×"
+                "×"
             }
         }
 
-        //正解か不正解かを設定
+        // 正解か不正解かを設定
         var isCorrectStr = "不正解!!!!"
         AA_AnsweResult_Text.setTextColor(Color.RED)
         if (myAnswerIsCorrected) {
