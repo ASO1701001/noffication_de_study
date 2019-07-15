@@ -126,7 +126,6 @@ class QuestionActivity : AppCompatActivity() {
         val db = questions.readableDatabase
         val QOH = QuestionsOpenHelper(db)
         val question_arr: ArrayList<String>? = QOH.find_question(examData.question_current)
-        // val question_arr: ArrayList<String>? = QOH.find_question(0)
         val question_str: String
         if (question_arr == null) {
             question_str = "問題文がありません"
@@ -160,11 +159,6 @@ class QuestionActivity : AppCompatActivity() {
         } else {
             Toast.makeText(this, "不正解です！", Toast.LENGTH_SHORT).show()
         }
-        /*
-        if(examData.mac==2) {
-            finish()
-        }
-        */
         answered()
     }
 
@@ -177,7 +171,6 @@ class QuestionActivity : AppCompatActivity() {
         window.addFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
         // DBにスキップしたとして999を登録して次の問題画面に画面遷移
         regAnswer(9999)
-        // val intent = Intent(this, QuestionActivity::class.java)
         startActivity<QuestionActivity>("exam_data" to examData)
         window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
     }
@@ -198,7 +191,7 @@ class QuestionActivity : AppCompatActivity() {
         examData.isCorrect_list.add(isCorrected)// 解いた問題が正解だったかどうかがBoolean型で入る
     }
 
-    //結果表示
+    // 結果表示
     private fun printResult() {
         // 解いた問題数を取得
         val BR: String? = System.getProperty("line.separator") // 改行用コードを取得
@@ -230,7 +223,6 @@ class QuestionActivity : AppCompatActivity() {
                 .setCancelable(false)// 範囲外タップによるキャンセルを不可にする
                 .setNeutralButton("間違った問題を解く") { _, _ ->
                     // 間違った問題のリストを用意して問題解答画面に遷移する処理
-                    // var tempQuestionList = this.examData.question_list
                     val tempQuestionList: ArrayList<Int> = ArrayList()
                     for (question_id in examData.question_list) {
                         tempQuestionList.add(question_id)
