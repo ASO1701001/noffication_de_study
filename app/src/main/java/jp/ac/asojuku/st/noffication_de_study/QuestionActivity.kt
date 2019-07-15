@@ -81,8 +81,14 @@ class QuestionActivity : AppCompatActivity() {
                     QA_Answers.visibility = View.GONE
                     QA_Skip_BTN.visibility = View.GONE
                     QA_TwoAnswers.visibility = View.VISIBLE
-                    QA_maru_BTN.setSafeClickListener { choiceAnswer(1) }
-                    QA_batu_BTN.setSafeClickListener { choiceAnswer(2) }
+                    QA_maru_BTN.setSafeClickListener {
+                        QA_TwoAnswers.visibility = View.INVISIBLE
+                        choiceAnswer(1)
+                    }
+                    QA_batu_BTN.setSafeClickListener {
+                        QA_TwoAnswers.visibility = View.INVISIBLE
+                        choiceAnswer(2)
+                    }
                     QA_End_BTN.setSafeClickListener { finish() }
                     QA_Next_BTN.text = "戻る"
                     QA_Next_BTN.setSafeClickListener { finish() }
