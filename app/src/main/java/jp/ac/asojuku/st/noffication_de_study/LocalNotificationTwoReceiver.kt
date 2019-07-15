@@ -57,6 +57,7 @@ class LocalNotificationTwoReceiver : BroadcastReceiver() {
             .setContentText(markingResult)
             .setContentIntent(pendingIntent)
             .setColor(Color.BLUE)
+            .setAutoCancel(true)
             .addAction(
                 R.mipmap.ic_launcher,
                 "もう一度解く",
