@@ -8,10 +8,7 @@ import jp.ac.asojuku.st.noffication_de_study.db.QuestionsGenresOpenHelper
 import kotlinx.android.synthetic.main.activity_question_option.*
 import org.jetbrains.anko.startActivity
 
-//TODO 問題オプション画面：おおよそ完成（99%）
 class QuestionOptionActivity : AppCompatActivity() {
-    //TODO 定数の値はすべて仮の値
-    val user_id = 12345678
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -197,13 +194,6 @@ class QuestionOptionActivity : AppCompatActivity() {
 
         // 問題数に応じて問題を選択する
         val QuestionsArrayList = ArrayList<Int>()
-        /*
-        for (tq in TempQuestions) {
-            for (i in 0..SpinnerNum - 1) {
-                QuestionsArrayList.add(tq)
-            }
-        }
-        */
 
         for (i in 0 until SpinnerNum) {
             QuestionsArrayList.add(TempQuestions[i])
