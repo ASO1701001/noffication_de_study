@@ -7,10 +7,15 @@
         tools:context=".MainActivity">
 
     <ImageView
-            android:layout_width="0dp"
-            android:layout_height="0dp" app:srcCompat="@drawable/notification_de_study_logo7_x1920"
-            android:id="@+id/imageView" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:layout_width="60sp"
+            android:layout_height="60sp" app:srcCompat="@drawable/notification_de_study_logo7_x1920"
+            android:id="@+id/imageView" app:layout_constraintEnd_toEndOf="@+id/M_Nowloading_Text"
+            app:layout_constraintBottom_toTopOf="@+id/M_Nowloading_Text"
+            app:layout_constraintStart_toStartOf="@+id/M_Nowloading_Text" android:layout_marginBottom="8dp"/>
+    <TextView
+            android:text="@string/M_Nowloading_Text_Str"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/M_Nowloading_Text" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="16dp"/>
 </android.support.constraint.ConstraintLayout>
