@@ -122,16 +122,34 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/QOA_Select_Genres_LL"
                     android:paddingTop="8dp">
-                <CheckBox
-                        android:text="CheckBox"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/QOA_Select_Genres_1"
-                        style="@android:style/Widget.Material.CompoundButton.CheckBox"/>
-                <CheckBox
-                        android:text="CheckBox"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/QOA_Select_Genres_2"
-                />
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                    <CheckBox
+                            android:text="@string/QOA_Select_Genres_1_Str"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/QOA_Select_Genres_1"
+                            style="@android:style/Widget.Material.CompoundButton.CheckBox"/>
+                    <CheckBox
+                            android:text="@string/QOA_Select_Genres_2_Str"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/QOA_Select_Genres_2"
+                    />
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                    <CheckBox
+                            android:text="@string/QOA_Select_Genres_3_Str"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/QOA_Select_Genres_3"/>
+                    <CheckBox
+                            android:text="@string/QOA_Select_Genres_4_Str"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/QOA_Select_Genres_4"/>
+                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                     android:orientation="horizontal"
