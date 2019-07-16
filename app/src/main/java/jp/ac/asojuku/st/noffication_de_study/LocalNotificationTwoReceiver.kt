@@ -51,7 +51,7 @@ class LocalNotificationTwoReceiver : BroadcastReceiver() {
         val notificationId = intent.getIntExtra("notification_id", 0)
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val notification = NotificationCompat.Builder(context, "channel_two_question")
-            .setSmallIcon(R.mipmap.notification_de_study_logo7)
+            .setSmallIcon(R.mipmap.notification_de_study_logo8)
             .setChannelId("channel_two_question")
             .setContentTitle("回答結果")
             .setContentText(markingResult)

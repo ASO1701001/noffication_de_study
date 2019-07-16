@@ -141,7 +141,7 @@ class LocalNotificationScheduleService : BroadcastReceiver() {
             .setCustomBigContentView(contentView)
             .setContentTitle("問題です")
             .setContentIntent(piQuestion)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setSmallIcon(R.mipmap.notification_de_study_logo8)
             .setAutoCancel(true)
             .build()
 
@@ -209,7 +209,7 @@ class LocalNotificationScheduleService : BroadcastReceiver() {
         // 通知の生成
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val notification = NotificationCompat.Builder(context, "channel_two_question")
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setSmallIcon(R.mipmap.notification_de_study_logo8)
             .setChannelId("channel_two_question")
             .setContentTitle("問題")
             .setContentText(questionContent)
