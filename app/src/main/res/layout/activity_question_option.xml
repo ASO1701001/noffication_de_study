@@ -84,22 +84,22 @@
                 <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content" android:visibility="gone">
                     <CheckBox
                             android:text="H29秋"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:id="@+id/QOA_Select_Exam_Number_H29F_RBTN"
-                            android:layout_weight="1" android:textSize="14sp"/>
+                            android:layout_weight="1" android:textSize="14sp" android:visibility="visible"/>
                     <CheckBox
                             android:text="H29春"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:id="@+id/QOA_Select_Exam_Number_H29S_RBTN"
-                            android:layout_weight="1" android:textSize="14sp"/>
+                            android:layout_weight="1" android:textSize="14sp" android:visibility="visible"/>
                     <CheckBox
                             android:text="H28秋"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:id="@+id/QOA_Select_Exam_Number_H28F_RBTN"
-                            android:layout_weight="1" android:textSize="14sp"/>
+                            android:layout_weight="1" android:textSize="14sp" android:visibility="visible"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
