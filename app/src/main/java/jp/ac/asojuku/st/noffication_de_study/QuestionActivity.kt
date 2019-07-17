@@ -11,8 +11,12 @@ import android.widget.Toast
 import jp.ac.asojuku.st.noffication_de_study.db.AnswersOpenHelper
 import jp.ac.asojuku.st.noffication_de_study.db.ImageOpenHelper
 import jp.ac.asojuku.st.noffication_de_study.db.QuestionsOpenHelper
+import jp.ac.asojuku.st.noffication_de_study.db.UserAnswersOpenHelper
 import kotlinx.android.synthetic.main.activity_question.*
 import org.jetbrains.anko.startActivity
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class QuestionActivity : AppCompatActivity() {
     lateinit var examData: ExamData
@@ -194,7 +198,38 @@ class QuestionActivity : AppCompatActivity() {
         if (choice_number == answer) {
             isCorrected = true
         }
-        examData.isCorrect_list.add(isCorrected)// 解いた問題が正解だったかどうかがBoolean型で入る
+        examData.isCorrect_list.add(isCorrected) // 解いた問題が正解だったかどうかがBoolean型で入る
+
+        // 回答をDBに登録
+        val uaHelper = UserAnswersOpenHelper(db)
+        val userAnswerId = uaHelper.getNewId()
+        uaHelper.addRecord(
+            userAnswerId,
+            examData.question_current,
+            choice_number,
+            (System.currentTimeMillis() / 1000).toString(),
+            db
+        )
+
+        val data = getSharedPreferences("user_data", MODE_PRIVATE)
+        val userId = data.getString("user_id", "0") as String
+        if (userId != "0") {
+            val date = Date()
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val formattedDate = dateFormat.format(date)
+
+            ApiPostTask {
+
+            }.execute(
+                "add-answer.php",
+                hashMapOf(
+                    "user_id" to userId,
+                    "question_id" to examData.question_current,
+                    "answer_choice" to choice_number,
+                    "answer_time" to formattedDate
+                ).toString()
+            )
+        }
     }
 
     // 結果表示
