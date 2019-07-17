@@ -26,13 +26,6 @@ class TitleActivity : AppCompatActivity() {
 
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        val data = getSharedPreferences("user_data", MODE_PRIVATE)
-        val userId = data.getString("user_id", "0")
-    }
-
     // Android端末側の戻るボタンを押した時の処理を上書き
     override fun onBackPressed() {
         val builder = AlertDialog.Builder(this)
