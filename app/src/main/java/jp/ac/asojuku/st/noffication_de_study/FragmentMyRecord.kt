@@ -124,7 +124,7 @@ class FragmentMyRecord : Fragment() {
     fun setListView(examName: String) {
         val helper = SQLiteHelper(contextIn)
         val db = helper.readableDatabase
-        val listViewQuery = "SELECT correct.question_id, correct.question, SUM(CASE WHEN correct.answer_choice IS NULL OR correct.answer_choice IS 9999 THEN 0 ELSE (CASE WHEN correct.answer_choice IS correct.answer_number THEN 1 ELSE 0 END )END)as correct_count, COUNT(answer_choice) as answer_count" +
+        val listViewQuery = "SELECT correct.question_id as question_id , correct.question as question, SUM(CASE WHEN correct.answer_choice IS NULL OR correct.answer_choice IS 9999 THEN 0 ELSE (CASE WHEN correct.answer_choice IS correct.answer_number THEN 1 ELSE 0 END )END) as correct_count, COUNT(answer_choice) as answer_count" +
                 " FROM ((((select question_id from exams_questions where exams_number = ?)AS qId" +
                 " LEFT JOIN user_answers as ua ON qId.question_id = ua.question_id) as count" +
                 " LEFT JOIN questions as q ON count.question_id = q.question_id) as text" +
