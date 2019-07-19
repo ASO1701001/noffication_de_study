@@ -159,7 +159,7 @@ class QuestionOptionActivity : AppCompatActivity() {
             if (genre1_Questions != null) {
                 for (ty in TempYear_list) {
                     for (i in 0..ty!!.size) {
-                        for (j in 0 until genre1_Questions.size) {
+                        for (j in 1 until genre1_Questions.size) {
                             if (genre1_Questions[j] == ty[i][0]) {
                                 TempQuestions.add(genre1_Questions[j])
                             }
@@ -171,7 +171,7 @@ class QuestionOptionActivity : AppCompatActivity() {
             if (genre2_Questions != null) {
                 for (ty in TempYear_list) {
                     for (i in 0 until ty!!.size) {
-                        for (j in 0 until genre2_Questions.size) {
+                        for (j in 1 until genre2_Questions.size) {
                             if (genre2_Questions[j] == ty[i][0]) {
                                 TempQuestions.add(genre2_Questions[j])
                             }
