@@ -27,10 +27,6 @@ class AnswerActivity : AppCompatActivity() {
 
         at_first()
 
-        AA_Back_BTN.setSafeClickListener {
-            finish()
-        }
-
         AA_Next_BTN.setSafeClickListener {
             finish()
         }
@@ -47,12 +43,18 @@ class AnswerActivity : AppCompatActivity() {
                 AA_Next_BTN.setSafeClickListener {
                     startActivity<QuestionActivity>("exam_data" to exam_data)
                 }
+                AA_Back_BTN.setSafeClickListener {
+                    finish()
+                }
                 AA_Next_BTN.visibility = View.VISIBLE
             }
             // FragmentQuestion.ktから
             2 -> {
                 AA_Next_BTN.text = "統計に戻る"
                 AA_Next_BTN.setSafeClickListener {
+                    finish()
+                }
+                AA_Back_BTN.setSafeClickListener {
                     finish()
                 }
             }
@@ -62,12 +64,18 @@ class AnswerActivity : AppCompatActivity() {
                 AA_Next_BTN.setSafeClickListener {
                     finish()
                 }
+                AA_Back_BTN.setSafeClickListener {
+                    startActivity<TitleActivity>()
+                }
             }
             // ○×から
             4 -> {
                 AA_Next_BTN.text = "戻る"
                 AA_Next_BTN.setSafeClickListener {
                     finish()
+                }
+                AA_Back_BTN.setSafeClickListener {
+                    startActivity<TitleActivity>()
                 }
             }
         }
