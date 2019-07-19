@@ -71,30 +71,30 @@ class OptionActivity : AppCompatActivity() {
         super.onResume()
 
         OA_Back_BTN.setSafeClickListener {
-            finish()
+            pushEndButton()
         }
 
         // 出題モード
         OA_NDS_Mode_BTN.setSafeClickListener {
-            spEditor.putBoolean("NDS_check", OA_NDS_Mode_BTN.isChecked).apply()
-            val service = LocalNotificationScheduleService()
-            service.registerNotice(this)
+//            spEditor.putBoolean("NDS_check", OA_NDS_Mode_BTN.isChecked).apply()
+//            val service = LocalNotificationScheduleService()
+//            service.registerNotice(this)
         }
 
         // 画面点灯モード
         OA_SDS_Mode_BTN.setSafeClickListener {
-            spEditor.putBoolean("SDS_check", OA_SDS_Mode_BTN.isChecked).apply()
+//            spEditor.putBoolean("SDS_check", OA_SDS_Mode_BTN.isChecked).apply()
 
-            val service = Intent(this, LocalNotificationForegroundService::class.java)
-            if (OA_SDS_Mode_BTN.isChecked) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    startForegroundService(service)
-                } else {
-                    startService(service)
-                }
-            } else {
-                stopService(service)
-            }
+//            val service = Intent(this, LocalNotificationForegroundService::class.java)
+//            if (OA_SDS_Mode_BTN.isChecked) {
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//                    startForegroundService(service)
+//                } else {
+//                    startService(service)
+//                }
+//            } else {
+//                stopService(service)
+//            }
         }
 
         // 通知の問題の出題方法
@@ -225,6 +225,31 @@ class OptionActivity : AppCompatActivity() {
                 }
             }.execute("add-user.php", hashMapOf("token" to user.uid).toString())
         }
+    }
+    private fun pushEndButton(){
+        spEditor.putBoolean("NDS_check", OA_NDS_Mode_BTN.isChecked).apply()
+        spEditor.putBoolean("SDS_check", OA_SDS_Mode_BTN.isChecked).apply()
+        val serviceN = LocalNotificationScheduleService()
+        serviceN.registerNotice(this)
+
+        val serviceS = Intent(this, LocalNotificationForegroundService::class.java)
+        if (OA_SDS_Mode_BTN.isChecked) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                startForegroundService(serviceS)
+            } else {
+                startService(serviceS)
+            }
+        } else {
+            stopService(serviceS)
+        }
+        finish()
+    }
+
+    override fun onBackPressed() {
+        pushEndButton()
+        return // 無理やりリターンされることでActivityがDestroyされることを防ぐ
+        // 以下は必ず処理されない。この方法がどうなのかは微妙
+        super.onBackPressed()
     }
     // Google SignIn <-
 
