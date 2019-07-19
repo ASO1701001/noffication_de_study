@@ -31,6 +31,10 @@
     <string name="SA_Title_Text_Str">統計情報</string>
     <string name="SA_back_BTN_Disc">戻るボタン</string>
     <string name="M_Nowloading_Text_Str">NOW LOADING..</string>
+    <string name="QOA_Select_Genres_1_Str">テクノロジ系</string>
+    <string name="QOA_Select_Genres_2_Str">マネジメント系</string>
+    <string name="QOA_Select_Genres_3_Str">ストラテジ系</string>
+    <string name="QOA_Select_Genres_4_Str">計算問題</string>
     <string-array name="OA_Noffication_Interval_list">
         <item>5</item>
         <item>10</item>
