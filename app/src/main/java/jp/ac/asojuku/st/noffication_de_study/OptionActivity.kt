@@ -74,29 +74,6 @@ class OptionActivity : AppCompatActivity() {
             pushEndButton()
         }
 
-        // 出題モード
-        OA_NDS_Mode_BTN.setSafeClickListener {
-//            spEditor.putBoolean("NDS_check", OA_NDS_Mode_BTN.isChecked).apply()
-//            val service = LocalNotificationScheduleService()
-//            service.registerNotice(this)
-        }
-
-        // 画面点灯モード
-        OA_SDS_Mode_BTN.setSafeClickListener {
-//            spEditor.putBoolean("SDS_check", OA_SDS_Mode_BTN.isChecked).apply()
-
-//            val service = Intent(this, LocalNotificationForegroundService::class.java)
-//            if (OA_SDS_Mode_BTN.isChecked) {
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//                    startForegroundService(service)
-//                } else {
-//                    startService(service)
-//                }
-//            } else {
-//                stopService(service)
-//            }
-        }
-
         // 通知の問題の出題方法
         way_radio_group.setOnCheckedChangeListener { _, id ->
             when (id) {
@@ -116,7 +93,8 @@ class OptionActivity : AppCompatActivity() {
                     val endTime = spGetter.getString("NDS_End", "21:00") as String
                     val endTimeList: List<String> = endTime.split(Regex(":"))
                     if (hourOfDay > Integer.parseInt(endTimeList[0]) ||
-                        (hourOfDay == Integer.parseInt(endTimeList[0]) && minuteOfDay >= Integer.parseInt(endTimeList[1]))) {
+                        (hourOfDay == Integer.parseInt(endTimeList[0]) && minuteOfDay >= Integer.parseInt(endTimeList[1]))
+                    ) {
                         Toast.makeText(this, "終了時間を超えています", Toast.LENGTH_LONG).show()
                     } else {
                         val time = String.format("%02d:%02d", hourOfDay, minuteOfDay)
@@ -138,7 +116,10 @@ class OptionActivity : AppCompatActivity() {
                     val startTime = spGetter.getString("NDS_Start", "09:00") as String
                     val startTimeList: List<String> = startTime.split(Regex(":"))
                     if (hourOfDay < Integer.parseInt(startTimeList[0]) ||
-                        (hourOfDay == Integer.parseInt(startTimeList[0]) && minuteOfDay <= Integer.parseInt(startTimeList[1]))) {
+                        (hourOfDay == Integer.parseInt(startTimeList[0]) && minuteOfDay <= Integer.parseInt(
+                            startTimeList[1]
+                        ))
+                    ) {
                         Toast.makeText(this, "開始時間を超えています", Toast.LENGTH_LONG).show()
                     } else {
                         val time = String.format("%02d:%02d", hourOfDay, minuteOfDay)
@@ -226,7 +207,9 @@ class OptionActivity : AppCompatActivity() {
             }.execute("add-user.php", hashMapOf("token" to user.uid).toString())
         }
     }
-    private fun pushEndButton(){
+    // Google SignIn <-
+
+    private fun pushEndButton() {
         spEditor.putBoolean("NDS_check", OA_NDS_Mode_BTN.isChecked).apply()
         spEditor.putBoolean("SDS_check", OA_SDS_Mode_BTN.isChecked).apply()
         val serviceN = LocalNotificationScheduleService()
@@ -251,6 +234,5 @@ class OptionActivity : AppCompatActivity() {
         // 以下は必ず処理されない。この方法がどうなのかは微妙
         super.onBackPressed()
     }
-    // Google SignIn <-
 
 }
