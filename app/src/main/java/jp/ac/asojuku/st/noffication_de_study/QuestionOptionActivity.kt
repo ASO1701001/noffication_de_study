@@ -86,41 +86,31 @@ class QuestionOptionActivity : AppCompatActivity() {
 
         // 試験回選択
         // 出題IDはFEだけなので、exams_idは1?
-        if (QOA_Select_Exam_Number_H31S_RBTN.isChecked) {
-            TempYear = EQOH.find_all_questions(1, "FE2019S")
-            TempYear_list.add(TempYear)
-            ExamName = "FE2019S"
-            ExamNameFlg++
-        }
-        if (QOA_Select_Exam_Number_H30F_RBTN.isChecked) {
-            TempYear = EQOH.find_all_questions(1, "FE2018F")
-            TempYear_list.add(TempYear)
-            ExamName = "FE2018F"
-            ExamNameFlg++
-        }
-        if (QOA_Select_Exam_Number_H30S_RBTN.isChecked) {
-            TempYear = EQOH.find_all_questions(1, "FE2018S")
-            TempYear_list.add(TempYear)
-            ExamName = "FE2018S"
-            ExamNameFlg++
-        }
-        if (QOA_Select_Exam_Number_H29F_RBTN.isChecked) {
-            TempYear = EQOH.find_all_questions(1, "FE2017F")
-            TempYear_list.add(TempYear)
-            ExamName = "FE2017F"
-            ExamNameFlg++
-        }
-        if (QOA_Select_Exam_Number_H29S_RBTN.isChecked) {
-            TempYear = EQOH.find_all_questions(1, "FE2017S")
-            TempYear_list.add(TempYear)
-            ExamName = "FE2017S"
-            ExamNameFlg++
-        }
-        if (QOA_Select_Exam_Number_H28F_RBTN.isChecked) {
-            TempYear = EQOH.find_all_questions(1, "FE2016F")
-            TempYear_list.add(TempYear)
-            ExamName = "FE2016F"
-            ExamNameFlg++
+        var yearCheckBottoms = listOf(
+            QOA_Select_Exam_Number_H31S_RBTN,
+            QOA_Select_Exam_Number_H30F_RBTN,
+            QOA_Select_Exam_Number_H30S_RBTN,
+            QOA_Select_Exam_Number_H29S_RBTN,
+            QOA_Select_Exam_Number_H29F_RBTN,
+            QOA_Select_Exam_Number_H28F_RBTN
+        )
+        var yearNames = listOf(
+            "FE2019S",
+            "FE2018F",
+            "FE2018S",
+            "FE2017F",
+            "FE2017S",
+            "FE2016F"
+        )
+
+        for (i in 0..yearCheckBottoms.size - 1) {
+            if (yearCheckBottoms[i].isChecked) {
+                TempYear = EQOH.find_all_questions(1, yearNames[i])
+                TempYear_list.add(TempYear)
+                ExamName = "FE2019S"
+                ExamNameFlg++
+            }
+
         }
 
         // 出題年度が選択されなかった場合(ExamData)が「""」だった場合
@@ -140,40 +130,47 @@ class QuestionOptionActivity : AppCompatActivity() {
 
         // ジャンルの読み込み
         val GOH = QuestionsGenresOpenHelper(db)
-        var genre1_Questions: ArrayList<Int>? = null
-        var genre2_Questions: ArrayList<Int>? = null
+        var genre1_Questions: MutableList<Int>? = null
+        var genre2_Questions: MutableList<Int>? = null
+        var genre3_Questions: MutableList<Int>? = null
+        var genre4_Questions: MutableList<Int>? = null
+        var isNoGenre = true
+        val genre_Questions = mutableListOf(
+            genre1_Questions,
+            genre2_Questions,
+            genre3_Questions,
+            genre4_Questions
+        )
+        val QOA_Genre_Bottoms = mutableListOf(
+            QOA_Select_Genres_1,
+            QOA_Select_Genres_2,
+            QOA_Select_Genres_3,
+            QOA_Select_Genres_4
+        )
 
-        // ジャンル検索
-        if (QOA_Select_Genres_1.isChecked) {
-            genre1_Questions = GOH.find_genre_questions(1)
+        //ジャンルごとの問題取得
+        for (i in 0..QOA_Genre_Bottoms.size - 1) {
+            if (QOA_Genre_Bottoms[i].isChecked) {
+                genre_Questions[i] = GOH.find_genre_questions(i + 1)
+                isNoGenre = false
+            }
         }
-        if (QOA_Select_Genres_2.isChecked) {
-            genre2_Questions = GOH.find_genre_questions(2)
-        }
+
 
         // 取得した問題から全てのArrayListに存在するものを書き出す
         // ArrayListのTempQuestionsに出題する問題を格納する
         val TempQuestions = ArrayList<Int>()
 
-        if (genre1_Questions != null || genre2_Questions != null) {
-            if (genre1_Questions != null) {
-                for (ty in TempYear_list) {
-                    for (i in 0..ty!!.size) {
-                        for (j in 0 until genre1_Questions.size) {
-                            if (genre1_Questions[j] == ty[i][0]) {
-                                TempQuestions.add(genre1_Questions[j])
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (genre2_Questions != null) {
-                for (ty in TempYear_list) {
-                    for (i in 0 until ty!!.size) {
-                        for (j in 0 until genre2_Questions.size) {
-                            if (genre2_Questions[j] == ty[i][0]) {
-                                TempQuestions.add(genre2_Questions[j])
+        if (!isNoGenre) {
+            for (n in 0..genre_Questions.size - 1) {
+                var genre_Question = genre_Questions[n]
+                if (genre_Question != null) {
+                    for (ty in TempYear_list) {
+                        for (i in 0..ty!!.size - 1) {
+                            for (j in 1 until genre_Question.size - 1) {
+                                if (genre_Question[j] == ty[i][0]) {
+                                    TempQuestions.add(genre_Question[j])
+                                }
                             }
                         }
                     }
@@ -181,11 +178,12 @@ class QuestionOptionActivity : AppCompatActivity() {
             }
         } else {
             for (ty in TempYear_list) {
-                for (i in 0 until ty!!.size) {
+                for (i in 0 until ty!!.size - 1) {
                     TempQuestions.add(ty[i][0])
                 }
             }
         }
+
 
         // ランダム出題するか、そうじゃないかで問題順を並び替える
         if (QOA_Select_Method_Random_RBTN.isChecked) {
