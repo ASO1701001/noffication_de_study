@@ -86,7 +86,7 @@ class QuestionOptionActivity : AppCompatActivity() {
 
         // 試験回選択
         // 出題IDはFEだけなので、exams_idは1?
-        var yearCheckBottoms = listOf(
+        val yearCheckBottoms = listOf(
             QOA_Select_Exam_Number_H31S_RBTN,
             QOA_Select_Exam_Number_H30F_RBTN,
             QOA_Select_Exam_Number_H30S_RBTN,
@@ -94,7 +94,7 @@ class QuestionOptionActivity : AppCompatActivity() {
             QOA_Select_Exam_Number_H29F_RBTN,
             QOA_Select_Exam_Number_H28F_RBTN
         )
-        var yearNames = listOf(
+        val yearNames = listOf(
             "FE2019S",
             "FE2018F",
             "FE2018S",
@@ -130,10 +130,10 @@ class QuestionOptionActivity : AppCompatActivity() {
 
         // ジャンルの読み込み
         val GOH = QuestionsGenresOpenHelper(db)
-        var genre1_Questions: MutableList<Int>? = null
-        var genre2_Questions: MutableList<Int>? = null
-        var genre3_Questions: MutableList<Int>? = null
-        var genre4_Questions: MutableList<Int>? = null
+        val genre1_Questions: MutableList<Int>? = null
+        val genre2_Questions: MutableList<Int>? = null
+        val genre3_Questions: MutableList<Int>? = null
+        val genre4_Questions: MutableList<Int>? = null
         var isNoGenre = true
         val genre_Questions = mutableListOf(
             genre1_Questions,
@@ -163,7 +163,7 @@ class QuestionOptionActivity : AppCompatActivity() {
 
         if (!isNoGenre) {
             for (n in 0..genre_Questions.size - 1) {
-                var genre_Question = genre_Questions[n]
+                val genre_Question = genre_Questions[n]
                 if (genre_Question != null) {
                     for (ty in TempYear_list) {
                         for (i in 0..ty!!.size - 1) {
