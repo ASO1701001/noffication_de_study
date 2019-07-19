@@ -195,16 +195,18 @@
             <RadioGroup
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/QOA_Select_Method_Group" android:paddingTop="8dp">
+                    android:id="@+id/QOA_Select_Method_Group" android:paddingTop="8dp"
+                    android:checkedButton="@id/QOA_Select_Method_Random_RBTN">
                 <RadioButton
                         android:text="順番に出題"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/QOA_Select_Method_Order_RBTN"
-                        android:checked="true"/>
+                        android:checked="false"/>
                 <RadioButton
                         android:text="ランダムに出題"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/QOA_Select_Method_Random_RBTN"/>
+                        android:layout_height="wrap_content" android:id="@+id/QOA_Select_Method_Random_RBTN"
+                        android:checked="false"/>
             </RadioGroup>
         </LinearLayout>
     </ScrollView>
