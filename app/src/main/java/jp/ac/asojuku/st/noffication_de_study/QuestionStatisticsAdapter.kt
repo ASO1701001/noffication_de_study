@@ -42,6 +42,7 @@ class QuestionStatisticsAdapter(internal var context: Context) : BaseAdapter() {
 
         (view.findViewById<View>(R.id.title) as TextView).text = statisticsItem[position].getTitle()
         (view.findViewById<View>(R.id.rate) as TextView).text = statisticsItem[position].getRate()
+        (view.findViewById<View>(R.id.sq_id) as TextView).text = (position+1).toString()
 
         return view
     }

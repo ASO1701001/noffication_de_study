@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                                             xmlns:tools="http://schemas.android.com/tools"
-                                             android:layout_width="match_parent"
-                                             android:layout_height="wrap_content">
 
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent">
     <TextView
-            android:text="TextView"
-            android:layout_width="0dp"
-            android:layout_height="28dp" android:id="@+id/title"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:textSize="24sp" android:singleLine="true" android:ellipsize="end"/>
-    <TextView
-            android:text="TextView"
-            android:layout_width="0dp"
-            android:layout_height="24dp" android:id="@+id/rate"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/title" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:textSize="18sp" android:gravity="right"/>
-</android.support.constraint.ConstraintLayout>
+            android:text="id"
+            android:layout_width="match_parent"
+            android:layout_height="60dp" android:id="@+id/sq_id" android:layout_weight="6"/>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:layout_weight="1">
+        <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/title"
+                android:layout_marginTop="8dp"
+                android:textSize="14sp" android:singleLine="true" android:ellipsize="end"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/rate"
+                android:layout_marginTop="8dp"
+                android:textSize="18sp" android:gravity="right"/>
+    </LinearLayout>
+</LinearLayout>
