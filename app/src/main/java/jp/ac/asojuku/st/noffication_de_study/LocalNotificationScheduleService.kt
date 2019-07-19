@@ -151,18 +151,18 @@ class LocalNotificationScheduleService : BroadcastReceiver() {
 
     // 四択問題の正誤判定
     private fun fourQuestionRegAnswer(choice_number: Int, examData: ExamData, context: Context) {
-        //自分の解答を登録
+        // 自分の解答を登録
         examData.answered_list.add(choice_number)
         //正解をDBから取得
         val answers = SQLiteHelper(context)
         val db = answers.readableDatabase
         val AOH = AnswersOpenHelper(db)
-        val answer = AOH.find_answers(examData.question_current)?.get(1) //正しい正解
-        var isCorrected = false //正解だった場合にtrueにする
+        val answer = AOH.find_answers(examData.question_current)?.get(1) // 正しい正解
+        var isCorrected = false // 正解だった場合にtrueにする
         if (choice_number == answer) {
             isCorrected = true
         }
-        examData.isCorrect_list.add(isCorrected)//解いた問題が正解だったかどうかがBoolean型で入る
+        examData.isCorrect_list.add(isCorrected)// 解いた問題が正解だったかどうかがBoolean型で入る
     }
 
     // 二択問題の通知の生成
@@ -259,8 +259,8 @@ class LocalNotificationScheduleService : BroadcastReceiver() {
         val spGetter = context.getSharedPreferences("user_data", MODE_PRIVATE)
         val startTime = spGetter.getString("NDS_Start", "09:00") as String
         val endTime = spGetter.getString("NDS_End", "21:00") as String
-        val endTimeInt = Integer.valueOf(endTime.replace(":", ""))
-        val startTimeList: List<String> = startTime.split(Regex(":"))
+        val endTimeList = endTime.split(Regex(":"))
+        val startTimeList = startTime.split(Regex(":"))
 
         if (spGetter.getBoolean("NDS_check", false)) {
             // 通知で出題する
@@ -272,10 +272,14 @@ class LocalNotificationScheduleService : BroadcastReceiver() {
             val calendar = Calendar.getInstance()
             calendar.timeInMillis = System.currentTimeMillis()
 
-            val sdf = SimpleDateFormat("HHmm", Locale.getDefault())
-            val nowTime = sdf.format(calendar.time) as String
+            val hourOfDay = SimpleDateFormat("HH", Locale.getDefault()).format(calendar.time).toInt()
+            val minuteOfDay = SimpleDateFormat("mm", Locale.getDefault()).format(calendar.time).toInt()
 
-            if (endTimeInt <= nowTime.toInt()) {
+            if (hourOfDay < Integer.parseInt(startTimeList[0]) ||
+                hourOfDay == Integer.parseInt(startTimeList[0]) && minuteOfDay <= Integer.parseInt(startTimeList[1]) ||
+                hourOfDay > Integer.parseInt(endTimeList[0]) ||
+                hourOfDay == Integer.parseInt(endTimeList[0]) && minuteOfDay >= Integer.parseInt(endTimeList[1])
+            ) {
                 // 現在の時間が出題する最終時間を超えていたら次の日に出題
                 calendar.add(Calendar.DATE, 1)
                 calendar.set(Calendar.HOUR, startTimeList[0].toInt())
@@ -290,7 +294,7 @@ class LocalNotificationScheduleService : BroadcastReceiver() {
             val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
         } else {
-            // 通知をキャンセル（できてるはず）
+            // 通知をキャンセル
             val intent = Intent(context, LocalNotificationScheduleService::class.java)
             val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
             val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
