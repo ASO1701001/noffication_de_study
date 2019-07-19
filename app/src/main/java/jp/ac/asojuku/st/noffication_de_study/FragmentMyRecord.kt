@@ -2,6 +2,7 @@ package jp.ac.asojuku.st.noffication_de_study
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -31,7 +32,6 @@ class FragmentMyRecord : Fragment() {
 
     inner class StatisticsItem {
         var id: Long = 0
-        var questionId: String? = null
         var question: String? = null
         var correctCount: String? = null
         var answerCount: String? = null
@@ -69,7 +69,7 @@ class FragmentMyRecord : Fragment() {
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
             val view = layoutInflater!!.inflate(R.layout.layout_statistics_activity_list, parent, false)
 
-            val outSolve = if (statisticsItem[position].correctCount!!.toInt() == 0) {
+            val outSolve = if (statisticsItem[position].answerCount!!.toInt() == 0) {
                 "未回答"
             } else {
                 "回答済み"
@@ -124,14 +124,13 @@ class FragmentMyRecord : Fragment() {
     fun setListView(examName: String) {
         val helper = SQLiteHelper(contextIn)
         val db = helper.readableDatabase
-        val listViewQuery = "SELECT text.question_id, text.question, " +
-                "CASE WHEN SUM(ua.answer_choice) IS NULL THEN 0 ELSE SUM(ua.answer_choice)END as correct_count, " +
-                "COUNT(answer_choice) as answer_count " +
-                "FROM (((select question_id from exams_questions where exams_number = ?)AS qId " +
-                "LEFT JOIN user_answers as ua ON qId.question_id = ua.question_id) as count " +
-                "LEFT JOIN questions as q ON count.question_id = q.question_id) as text " +
-                "GROUP BY qId.question_id " +
-                "ORDER BY qId.question_id"
+        val listViewQuery = "SELECT correct.question_id, correct.question, SUM(CASE WHEN correct.answer_choice IS NULL OR correct.answer_choice IS 9999 THEN 0 ELSE (CASE WHEN correct.answer_choice IS correct.answer_number THEN 1 ELSE 0 END )END)as correct_count, COUNT(answer_choice) as answer_count" +
+                " FROM ((((select question_id from exams_questions where exams_number = ?)AS qId" +
+                " LEFT JOIN user_answers as ua ON qId.question_id = ua.question_id) as count" +
+                " LEFT JOIN questions as q ON count.question_id = q.question_id) as text" +
+                " LEFT JOIN answers as a ON text.question_id = a.question_id) as correct" +
+                " GROUP BY correct.question_id " +
+                "ORDER BY correct.question_id"
         val listViewQueryCursor = db.rawQuery(listViewQuery, arrayOf(examName))
         listViewQueryCursor.moveToFirst()
         val list = ArrayList<StatisticsItem>()
@@ -157,6 +156,18 @@ class FragmentMyRecord : Fragment() {
         statisticsAdapter.setStatisticsItem(list)
         statisticsAdapter.notifyDataSetChanged()
         listView.adapter = statisticsAdapter
+
+        listView.setOnItemClickListener { parent, _, position, _ ->
+            val item = parent.getItemAtPosition(position) as StatisticsItem
+            val questionId = item.id
+
+            val examData = ExamData(2, "FE", "FE10901")
+            examData.question_list.add(questionId.toInt())
+
+            val intent = Intent(activity, QuestionActivity::class.java)
+            intent.putExtra("exam_data", examData)
+            startActivity(intent)
+        }
     }
 
     override fun onCreateView(

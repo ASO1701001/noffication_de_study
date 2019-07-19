@@ -42,21 +42,22 @@ class LocalNotificationTwoReceiver : BroadcastReceiver() {
         val examData = ExamData(4, "FE", "FE10901")
         examData.set_list_data(arrayListOf(questionId))
         val pendingIntent = PendingIntent.getActivity(
-            context, 777, Intent(
+            context, (Math.random() * 100000).toInt(), Intent(
                 context,
                 QuestionActivity::class.java
-            ).putExtra("exam_data", examData), 0
+            ).putExtra("exam_data", examData), PendingIntent.FLAG_UPDATE_CURRENT
         )
 
         val notificationId = intent.getIntExtra("notification_id", 0)
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val notification = NotificationCompat.Builder(context, "channel_two_question")
-            .setSmallIcon(R.mipmap.notification_de_study_logo7)
+            .setSmallIcon(R.mipmap.notification_de_study_logo8)
             .setChannelId("channel_two_question")
             .setContentTitle("回答結果")
             .setContentText(markingResult)
             .setContentIntent(pendingIntent)
             .setColor(Color.BLUE)
+            .setAutoCancel(true)
             .addAction(
                 R.mipmap.ic_launcher,
                 "もう一度解く",
@@ -82,6 +83,7 @@ class LocalNotificationTwoReceiver : BroadcastReceiver() {
                         answerExamData.set_list_data(arrayListOf(questionId))
                         answerExamData.question_current = questionId
                         answerExamData.question_next = questionId
+                        answerExamData.answered_list.add(userAnswer)
                         putExtra("exam_data", answerExamData)
                     },
                     PendingIntent.FLAG_UPDATE_CURRENT

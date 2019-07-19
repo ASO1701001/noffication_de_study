@@ -109,18 +109,19 @@ class OptionActivity : AppCompatActivity() {
         OA_Noffication_Time_Between1.setSafeClickListener {
             val nowTime = spGetter.getString("NDS_Start", "09:00")
             val nowTimeList: List<String> =
-                if (nowTime.isNullOrEmpty()) listOf("21", "00") else nowTime.split(Regex(":"))
+                if (nowTime.isNullOrEmpty()) listOf("9", "00") else nowTime.split(Regex(":"))
             TimePickerDialog(
                 this,
                 TimePickerDialog.OnTimeSetListener { _, hourOfDay, minuteOfDay ->
                     val endTime = spGetter.getString("NDS_End", "21:00") as String
                     val endTimeList: List<String> = endTime.split(Regex(":"))
-                    if (Integer.parseInt("$hourOfDay$minuteOfDay") <= Integer.parseInt(endTimeList[0] + endTimeList[1])) {
+                    if (hourOfDay > Integer.parseInt(endTimeList[0]) ||
+                        (hourOfDay == Integer.parseInt(endTimeList[0]) && minuteOfDay >= Integer.parseInt(endTimeList[1]))) {
+                        Toast.makeText(this, "終了時間を超えています", Toast.LENGTH_LONG).show()
+                    } else {
                         val time = String.format("%02d:%02d", hourOfDay, minuteOfDay)
                         OA_Noffication_Time_Between1.text = time
                         spEditor.putString("NDS_Start", time).apply()
-                    } else {
-                        Toast.makeText(this, "終了時間を超えています", Toast.LENGTH_LONG).show()
                     }
                 }, nowTimeList[0].toInt(), nowTimeList[1].toInt(), true
             ).show()
@@ -136,12 +137,13 @@ class OptionActivity : AppCompatActivity() {
                 TimePickerDialog.OnTimeSetListener { _, hourOfDay, minuteOfDay ->
                     val startTime = spGetter.getString("NDS_Start", "09:00") as String
                     val startTimeList: List<String> = startTime.split(Regex(":"))
-                    if (Integer.parseInt("$hourOfDay$minuteOfDay") >= Integer.parseInt(startTimeList[0] + startTimeList[1])) {
+                    if (hourOfDay < Integer.parseInt(startTimeList[0]) ||
+                        (hourOfDay == Integer.parseInt(startTimeList[0]) && minuteOfDay <= Integer.parseInt(startTimeList[1]))) {
+                        Toast.makeText(this, "開始時間を超えています", Toast.LENGTH_LONG).show()
+                    } else {
                         val time = String.format("%02d:%02d", hourOfDay, minuteOfDay)
                         OA_Noffication_Time_Between2.text = time
                         spEditor.putString("NDS_End", time).apply()
-                    } else {
-                        Toast.makeText(this, "開始時間を超えています", Toast.LENGTH_LONG).show()
                     }
                 }, nowTimeList[0].toInt(), nowTimeList[1].toInt(), true
             ).show()
