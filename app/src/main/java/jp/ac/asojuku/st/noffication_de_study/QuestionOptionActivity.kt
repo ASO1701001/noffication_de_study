@@ -197,7 +197,6 @@ class QuestionOptionActivity : AppCompatActivity() {
             QuestionsArrayList.add(TempQuestions[i])
         }
 
-
         // 問題ArrayList<Int>であるQuestionsArrayとStringを返す
         return Pair(QuestionsArrayList, ExamName)
     }
