@@ -91,6 +91,23 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                <TextView
+                        android:text="何問目かがここに表示されます"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/QA_Question_Number"
+                        android:paddingStart="8dp" android:paddingTop="8dp" android:paddingEnd="8dp"
+                        android:layout_weight="1"/>
+                <TextView
+                        android:text="全問中何問目かが表示されます"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/QA_Question_CurrentPosition" android:layout_weight="1"
+                        android:gravity="right" android:paddingEnd="8dp"
+                        android:paddingLeft="8dp" android:paddingStart="8dp"/>
+            </LinearLayout>
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/QA_Question_Text"
@@ -148,5 +165,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
             android:translationZ="200dp" app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintVertical_bias="0.0" tools:visibility="invisible"/>
+            app:layout_constraintVertical_bias="0.0" tools:visibility="invisible" android:paddingStart="8dp"
+            android:paddingTop="8dp" android:paddingEnd="8dp"/>
 </android.support.constraint.ConstraintLayout>

@@ -203,5 +203,6 @@ class MainActivity : AppCompatActivity() {
             .replace("&lt;".toRegex(), "<")
             .replace("&gt;".toRegex(), ">")
             .replace("&amp;".toRegex(), "&")
+            .replace("&#39;".toRegex(), "'")
     }
 }

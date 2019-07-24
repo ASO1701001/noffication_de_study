@@ -103,7 +103,7 @@ class QuestionOptionActivity : AppCompatActivity() {
             "FE2016F"
         )
 
-        for (i in 0..yearCheckBottoms.size - 1) {
+        for (i in 0 until yearCheckBottoms.size) {
             if (yearCheckBottoms[i].isChecked) {
                 TempYear = EQOH.find_all_questions(1, yearNames[i])
                 TempYear_list.add(TempYear)
@@ -149,7 +149,7 @@ class QuestionOptionActivity : AppCompatActivity() {
         )
 
         //ジャンルごとの問題取得
-        for (i in 0..QOA_Genre_Bottoms.size - 1) {
+        for (i in 0 until QOA_Genre_Bottoms.size) {
             if (QOA_Genre_Bottoms[i].isChecked) {
                 genre_Questions[i] = GOH.find_genre_questions(i + 1)
                 isNoGenre = false
@@ -162,12 +162,12 @@ class QuestionOptionActivity : AppCompatActivity() {
         val TempQuestions = ArrayList<Int>()
 
         if (!isNoGenre) {
-            for (n in 0..genre_Questions.size - 1) {
+            for (n in 0 until genre_Questions.size) {
                 val genre_Question = genre_Questions[n]
                 if (genre_Question != null) {
                     for (ty in TempYear_list) {
-                        for (i in 0..ty!!.size - 1) {
-                            for (j in 1 until genre_Question.size - 1) {
+                        for (i in 0 until ty!!.size) {
+                            for (j in 1 until genre_Question.size) {
                                 if (genre_Question[j] == ty[i][0]) {
                                     TempQuestions.add(genre_Question[j])
                                 }
@@ -178,7 +178,7 @@ class QuestionOptionActivity : AppCompatActivity() {
             }
         } else {
             for (ty in TempYear_list) {
-                for (i in 0 until ty!!.size - 1) {
+                for (i in 0 until ty!!.size) {
                     TempQuestions.add(ty[i][0])
                 }
             }

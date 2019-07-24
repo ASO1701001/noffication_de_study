@@ -147,7 +147,8 @@ class QuestionActivity : AppCompatActivity() {
                 question_image.setImageDrawable(this.getDrawable(imageAddress!!))
             }
         }
-
+        QA_Question_Number.text = "問 ${examData.isCorrect_list.size+1}"
+        QA_Question_CurrentPosition.text = "${examData.isCorrect_list.size+1} 問 / ${examData.question_list.size} 問"
         QA_Question_Text.text = question_str
 
     }
