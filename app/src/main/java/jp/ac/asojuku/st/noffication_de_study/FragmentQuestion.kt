@@ -57,7 +57,7 @@ class FragmentQuestion : Fragment() {
                 val item = QuestionStatisticsItem()
                 item.setId(it[0].toLong())
                 item.setTitle(questionHelper!!.find_question(it[0].toInt())!![1])
-                item.setRate((it[1].toDouble() * 100).toString() + " %")
+                item.setRate(Math.round(it[1].toDouble() * 100).toString() + " %")
                 list.add(item)
             }
 
