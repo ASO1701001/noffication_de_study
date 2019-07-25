@@ -290,7 +290,7 @@ class QuestionActivity : AppCompatActivity() {
                     examData.answered_list.clear() // 解答リストの初期化
                     startActivity(
                         Intent(
-                            this, MainActivity::class.java
+                            this, TitleActivity::class.java
                         ).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                     )
                 }
