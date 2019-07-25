@@ -8,10 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
-import jp.ac.asojuku.st.noffication_de_study.db.AnswersOpenHelper
-import jp.ac.asojuku.st.noffication_de_study.db.ImageOpenHelper
-import jp.ac.asojuku.st.noffication_de_study.db.QuestionsOpenHelper
-import jp.ac.asojuku.st.noffication_de_study.db.UserAnswersOpenHelper
+import jp.ac.asojuku.st.noffication_de_study.db.*
 import kotlinx.android.synthetic.main.activity_question.*
 import org.jetbrains.anko.startActivity
 import java.text.SimpleDateFormat
@@ -135,6 +132,7 @@ class QuestionActivity : AppCompatActivity() {
         val questions = SQLiteHelper(this)
         val db = questions.readableDatabase
         val QOH = QuestionsOpenHelper(db)
+        val EQOH = ExamsQuestionsOpenHelper(db)
         val question_arr: ArrayList<String>? = QOH.find_question(examData.question_current)
         val question_str: String
         if (question_arr == null) {
@@ -149,7 +147,8 @@ class QuestionActivity : AppCompatActivity() {
         }
         QA_Question_Number.text = "問 ${examData.isCorrect_list.size+1}"
         QA_Question_CurrentPosition.text = "${examData.isCorrect_list.size+1} 問 / ${examData.question_list.size} 問"
-        QA_Question_Text.text = question_str
+        val question_number = EQOH.find_exam_number_from_question_id(examData.question_current).toString()
+        QA_Question_Text.text = "$question_number\n$question_str"
 
     }
 
