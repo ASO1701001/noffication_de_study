@@ -34,27 +34,6 @@ class ExamsQuestionsOpenHelper(var db: SQLiteDatabase) {
         }
     }
 
-    fun find_all_questions_from_exam_number(exams_number: String): ArrayList<Int>? {
-        val query =
-            "SELECT * FROM $tableName where exams_number = '$exams_number'"
-        val cursor = db.rawQuery(query, null)
-
-        return try {
-            cursor.moveToFirst()
-
-            val array = ArrayList<Int>()
-            for (i in 0 until cursor.count) {
-                array.add(cursor.getInt(2))
-                cursor.moveToNext()
-            }
-            cursor.close()
-            array
-        } catch (e: CursorIndexOutOfBoundsException) {
-            cursor.close()
-            null
-        }
-    }
-
     fun find_exam_number_from_question_id(question_id: Int): String? {
         val query =
             "SELECT * FROM $tableName where question_id = $question_id"

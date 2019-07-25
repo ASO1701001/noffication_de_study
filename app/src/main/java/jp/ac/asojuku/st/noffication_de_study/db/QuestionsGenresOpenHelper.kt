@@ -8,27 +8,6 @@ import android.database.sqlite.SQLiteDatabase
 class QuestionsGenresOpenHelper(var db: SQLiteDatabase) {
     val tableName: String = "questions_genres"
 
-    fun find_question_genres(question_id: Int): ArrayList<Int>? {
-
-        val query = "SELECT * FROM $tableName where question_id = $question_id"
-        val cursor = db.rawQuery(query, null)
-
-        return try {
-            cursor.moveToFirst()
-            val array = ArrayList<Int>()
-            array.add(cursor.getInt(0))
-            for (i in 0 until cursor.count) {
-                array.add(cursor.getInt(1))
-                cursor.moveToNext()
-            }
-            cursor.close()
-            array
-        } catch (e: CursorIndexOutOfBoundsException) {
-            cursor.close()
-            null
-        }
-    }
-
     fun find_genre_questions(genre_id: Int): ArrayList<Int>? {
         val query = "SELECT * FROM $tableName where genre_id = $genre_id"
         val cursor = db.rawQuery(query, null)

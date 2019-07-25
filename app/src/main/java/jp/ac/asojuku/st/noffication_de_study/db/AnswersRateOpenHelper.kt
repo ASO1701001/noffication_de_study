@@ -8,20 +8,6 @@ import android.database.sqlite.SQLiteDatabase
 class AnswersRateOpenHelper(var db: SQLiteDatabase) {
     val tableName: String = "answers_rate"
 
-    fun find_rate(question_id: Int): Double? {
-        val query = "SELECT * FROM $tableName where question_id = $question_id"
-        val cursor = db.rawQuery(query, null)
-        return try {
-            cursor.moveToFirst()
-            val result: Double = cursor.getDouble(1)
-            cursor.close()
-            result
-        } catch (e: CursorIndexOutOfBoundsException) {
-            cursor.close()
-            null
-        }
-    }
-
     fun find_all_rate(): ArrayList<String>? {
         val query = "SELECT * FROM $tableName"
         val cursor = db.rawQuery(query, null)
@@ -29,7 +15,6 @@ class AnswersRateOpenHelper(var db: SQLiteDatabase) {
         return try {
             cursor.moveToFirst()
             val array = ArrayList<String>()
-            var bufferList = ArrayList<String>()
 
             for (i in 0 until cursor.count) {
                 array.add(cursor.getString(0))
