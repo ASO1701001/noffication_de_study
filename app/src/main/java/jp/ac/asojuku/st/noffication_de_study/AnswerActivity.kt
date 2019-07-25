@@ -144,7 +144,6 @@ class AnswerActivity : AppCompatActivity() {
 
         val answerStr = "自分の回答：" + myAnswerStr + BR + "正解 : " + answer
 
-        answer_examNumber_text.text = exam_data.number
         answer_question_correct_text.text = answerStr
         AA_answerComment_text.text = questionsDB.find_comment(question_id)?.get(1)
     }
