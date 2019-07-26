@@ -35,6 +35,9 @@
     <string name="QOA_Select_Genres_2_Str">マネジメント系</string>
     <string name="QOA_Select_Genres_3_Str">ストラテジ系</string>
     <string name="QOA_Select_Genres_4_Str">計算問題</string>
+    <string name="OA_back_dialog_title">設定を保存しますか？</string>
+    <string name="OA_back_dialog_button_positive">はい</string>
+    <string name="OA_back_dialog_button_negative">いいえ</string>
     <string-array name="OA_Noffication_Interval_list">
         <item>5</item>
         <item>10</item>

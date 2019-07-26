@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.AdapterView
@@ -34,6 +35,11 @@ class OptionActivity : AppCompatActivity() {
     private lateinit var spGetter: SharedPreferences
 
     private val noticeIntervalItems = arrayOf("5", "10", "15", "20", "25", "30")
+
+    private var radioSelect = "four"
+    private var interval = "5"
+    private var startTime = "09:00"
+    private var endTime = "21:00"
 
     @SuppressLint("CommitPrefEdits")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,8 +83,8 @@ class OptionActivity : AppCompatActivity() {
         // 通知の問題の出題方法
         way_radio_group.setOnCheckedChangeListener { _, id ->
             when (id) {
-                R.id.way_four_radio_button -> spEditor.putString("way_radio_select", "four").apply()
-                R.id.way_two_radio_button -> spEditor.putString("way_radio_select", "two").apply()
+                R.id.way_four_radio_button -> radioSelect = "four"
+                R.id.way_two_radio_button -> radioSelect = "two"
             }
         }
 
@@ -99,7 +105,7 @@ class OptionActivity : AppCompatActivity() {
                     } else {
                         val time = String.format("%02d:%02d", hourOfDay, minuteOfDay)
                         OA_Noffication_Time_Between1.text = time
-                        spEditor.putString("NDS_Start", time).apply()
+                        startTime = time
                     }
                 }, nowTimeList[0].toInt(), nowTimeList[1].toInt(), true
             ).show()
@@ -124,7 +130,7 @@ class OptionActivity : AppCompatActivity() {
                     } else {
                         val time = String.format("%02d:%02d", hourOfDay, minuteOfDay)
                         OA_Noffication_Time_Between2.text = time
-                        spEditor.putString("NDS_End", time).apply()
+                        endTime = time
                     }
                 }, nowTimeList[0].toInt(), nowTimeList[1].toInt(), true
             ).show()
@@ -135,7 +141,7 @@ class OptionActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val spinner = parent as Spinner
                 val select = spinner.selectedItem.toString()
-                spEditor.putString("NDS_Interval", select).apply()
+                interval = select
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -210,22 +216,33 @@ class OptionActivity : AppCompatActivity() {
     // Google SignIn <-
 
     private fun pushEndButton() {
-        spEditor.putBoolean("NDS_check", OA_NDS_Mode_BTN.isChecked).apply()
-        spEditor.putBoolean("SDS_check", OA_SDS_Mode_BTN.isChecked).apply()
-        val serviceN = LocalNotificationScheduleService()
-        serviceN.registerNotice(this)
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(R.string.OA_back_dialog_title)
+            .setPositiveButton(R.string.OA_back_dialog_button_positive) { _, _ ->
+                spEditor.putBoolean("NDS_check", OA_NDS_Mode_BTN.isChecked).apply()
+                spEditor.putBoolean("SDS_check", OA_SDS_Mode_BTN.isChecked).apply()
+                spEditor.putString("way_radio_select", radioSelect).apply()
+                spEditor.putString("NDS_Interval", interval).apply()
+                spEditor.putString("NDS_Start", startTime).apply()
+                spEditor.putString("NDS_End", endTime).apply()
+                val serviceN = LocalNotificationScheduleService()
+                serviceN.registerNotice(this)
 
-        val serviceS = Intent(this, LocalNotificationForegroundService::class.java)
-        if (OA_SDS_Mode_BTN.isChecked) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                startForegroundService(serviceS)
-            } else {
-                startService(serviceS)
+                val serviceS = Intent(this, LocalNotificationForegroundService::class.java)
+                if (OA_SDS_Mode_BTN.isChecked) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        startForegroundService(serviceS)
+                    } else {
+                        startService(serviceS)
+                    }
+                } else {
+                    stopService(serviceS)
+                }
+                finish()
+            }.setNegativeButton(R.string.OA_back_dialog_button_negative){_,_ ->
+
             }
-        } else {
-            stopService(serviceS)
-        }
-        finish()
+        builder.show()
     }
 
     override fun onBackPressed() {
@@ -234,5 +251,4 @@ class OptionActivity : AppCompatActivity() {
         // 以下は必ず処理されない。この方法がどうなのかは微妙
         super.onBackPressed()
     }
-
 }
