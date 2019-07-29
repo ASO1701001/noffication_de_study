@@ -3,6 +3,7 @@ package jp.ac.asojuku.st.noffication_de_study
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -79,6 +80,9 @@ class FragmentMyRecord : Fragment() {
             (view.findViewById<View>(R.id.flg) as TextView).text = outSolve
             (view.findViewById<View>(R.id.count) as TextView).text =
                 String.format("%s / %s", statisticsItem[position].correctCount, statisticsItem[position].answerCount)
+            if(statisticsItem[position].answerCount!!.toInt()>2 && (statisticsItem[position].correctCount!!.toDouble() / statisticsItem[position].answerCount!!.toDouble() < 0.3)){
+                (view.findViewById<View>(R.id.background) as LinearLayout).setBackgroundColor(Color.parseColor("#FFB1C3"))
+            }
 
             return view
         }
