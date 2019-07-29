@@ -193,7 +193,14 @@ class QuestionOptionActivity : AppCompatActivity() {
         // 問題数に応じて問題を選択する
         val QuestionsArrayList = ArrayList<Int>()
 
-        for (i in 0 until SpinnerNum) {
+        // 最大出題数を確認する。
+        // これをしないと、↓ の処理で IndexOutOfBoundsException になる。
+        var questionSize = TempQuestions.size
+        if(SpinnerNum <= TempQuestions.size){
+            questionSize = SpinnerNum
+        }
+        // 問題を出題問題リストに登録する。
+        for (i in 0 until questionSize) {
             QuestionsArrayList.add(TempQuestions[i])
         }
 
