@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "APIの通信に失敗しました(´･ω･`)", Toast.LENGTH_SHORT).show()
             }
             val db = SQLiteHelper(this).writableDatabase
-            val query = "SELECT * FROM questions_genres LIMIT 1"
+            val query = "SELECT * FROM questions_genres WHERE genre_id = 1"
             val cursor = db.rawQuery(query, null)
             if(!cursor.moveToNext()){
                 val builder = AlertDialog.Builder(this)
