@@ -240,7 +240,7 @@ class OptionActivity : AppCompatActivity() {
                 }
                 finish()
             }.setNegativeButton(R.string.OA_back_dialog_button_negative){_,_ ->
-
+                finish()
             }
         builder.show()
     }
