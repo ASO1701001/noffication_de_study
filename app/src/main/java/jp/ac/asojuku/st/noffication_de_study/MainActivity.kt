@@ -8,6 +8,7 @@ import android.database.Cursor
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import jp.ac.asojuku.st.noffication_de_study.db.*
@@ -44,14 +45,35 @@ class MainActivity : AppCompatActivity() {
             notificationManager.createNotificationChannel(notificationChannel)
         }
 
+        // データをAPIサーバにリクエストする。
+        // 再接続時に再度呼び出すので、メソッド化しました。
+        dataDownload()
+    }
+
+    private fun dataDownload(){
         ApiGetTask {
             if (!it.isNullOrEmpty()) {
                 allUpdate(JSONObject(it))
             } else {
                 Toast.makeText(this, "APIの通信に失敗しました(´･ω･`)", Toast.LENGTH_SHORT).show()
             }
-            startActivity<TitleActivity>()
-            finish()
+            val db = SQLiteHelper(this).writableDatabase
+            val query = "SELECT * FROM questions_genres LIMIT 1"
+            val cursor = db.rawQuery(query, null)
+            if(!cursor.moveToNext()){
+                val builder = AlertDialog.Builder(this)
+                builder.setMessage("ダウンロードに失敗しました。\nネットワーク環境を確認してください。")
+                    .setCancelable(false)// 範囲外タップによるキャンセルを不可にする
+                    .setNegativeButton("再接続") { _, _ ->
+                        dataDownload()
+                    }
+                    .setPositiveButton("アプリを終了する。") { _, _ ->
+                        finish()
+                    }.show()
+            }else{
+                startActivity<TitleActivity>()
+                finish()
+            }
         }.execute("db-update.php", hashMapOf("last_update_date" to findLastUpdate()).toString())
     }
 
