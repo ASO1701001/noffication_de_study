@@ -288,7 +288,7 @@ class LocalNotificationScheduleService : BroadcastReceiver() {
                 calendar.set(Calendar.MILLISECOND, 0)
             } else {
                 // 現在の時間に通知間隔を加算して出題
-                calendar.add(Calendar.SECOND, spaceTime.toInt())
+                calendar.add(Calendar.MINUTE, spaceTime.toInt())
             }
 
             val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
